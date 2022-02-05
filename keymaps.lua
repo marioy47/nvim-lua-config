@@ -1,74 +1,52 @@
 -- keymaps.lua
---
-function set_keymap(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
 
-function nmap(shortcut, command)
-  set_keymap("n", shortcut, command)
-end
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+local expr = { noremap = true, silent = true, expr = true }
 
-function imap(shortcut, command)
-  set_keymap("i", shortcut, command)
-end
-
-function vmap(shortcut, command)
-  set_keymap("v", shortcut, command)
-end
-
-function cmap(shortcut, command)
-  set_keymap("c", shortcut, command)
-end
-
-function tmap(shortcut, command)
-  set_keymap("t", shortcut, command)
-end
-
-function xmap(shortcut, command)
-  set_keymap("x", shortcut, command)
-end
-
-set_keymap("", "<Space>", "<Nop>")
+-- Map leader key to space
+map("n", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Don't jump when using *
-nmap('*', '*<c-o>')
+--nmap('*', '*<c-o>')
+map("n", "*", "*<C-o>", opts)
 
 -- Keep search matches in the middle of the window
-nmap('n', 'nzzzv') -- Search matches in the middle of the screen
-nmap('N', 'Nzzzv') -- Search matches in the middle of the screen
+map("n", "n", "nzzzv", opts)
+map("n", "N", "Nzzzv", opts)
 
 -- NetRW (Lexplore Sexplore)
-nmap( "<leader>ex", ":Lex 30<cr>")
+map("n", "<Leader>le", ":Lex 30<Cr>", opts)
 
 -- Clear matches
-nmap("<C-l>", ":noh<CR>")
-
+map("n", "<C-l>", ":noh<Cr>", opts)
 
 -- Reselect visual block after indent/outdent
-vmap('<', '<gv')
-vmap('>', '>gv')
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
 
 -- ESC to go to normal mode in terminal
-tmap('<C-s>', '<C-\\><C-n>')
-tmap('<Esc><Esc>', '<C-\\><C-n>')
+map("t", "<C-s>", "<C-\\><C-n>", opts)
+map("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
 
--- Resize with arrows
-nmap( "<S-k>", ":resize +2<CR>")
-nmap( "<S-j>", ":resize -2<CR>")
-nmap( "<S-l>", ":vertical resize -2<CR>")
-nmap( "<S-h>", ":vertical resize +2<CR>")
+-- Resize windows
+map("n", "<C-y>", ":resize +2<CR>", opts)
+map("n", "<C-u>", ":resize -2<CR>", opts)
+map("n", "<C-i>", ":vertical resize -2<CR>", opts)
+map("n", "<C-o>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-nmap( "<S-Tab>", ":bnext<CR>", opts)
-nmap( "<leader>bu", ":buffers<CR>", opts)
+map("n", "<S-Tab>", ":bnext<CR>", opts)
+map("n", "<leader>bu", ":buffers<CR>", opts)
 
 -- Move text up and down
-xmap( "J", ":move '>+1<CR>gv-gv", opts)
-xmap( "K", ":move '<-2<CR>gv-gv", opts)
---xmap( "<A-j>", ":move '>+1<CR>gv-gv", opts)
---xmap( "<A-k>", ":move '<-2<CR>gv-gv", opts)
+map("x", "J", ":move '>+1<CR>gv-gv", opts)
+map("x", "K", ":move '<-2<CR>gv-gv", opts)
 
+-- Deal with motions in visual line wraps
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", expr)
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", expr)
 
 -- vim: ts=2 sw=2 et
