@@ -20,7 +20,11 @@ local packer = require("packer")
 
 -- Install your plugins here
 return packer.startup(function(use)
-  use "wbthomason/packer.nvim" -- Have packer manage itself
+  use "wbthomason/packer.nvim"     -- Have packer manage itself
+
+  use "mhartington/oceanic-next"   -- Beautiful pastell-y colors
+  use "folke/tokyonight.nvim"      -- Port of VSCode's Tokio Night
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   if packer_bootstrap then
