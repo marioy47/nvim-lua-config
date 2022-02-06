@@ -33,6 +33,11 @@ use {
   "folke/tokyonight.nvim",      -- Port of VSCode"s Tokio Night
   config = get_config("tokionight")
 }
+use {
+  "nvim-lualine/lualine.nvim",
+  requires = { "kyazdani42/nvim-web-devicons", opt = true },
+  config = get_config("lualine")
+}
 
 
 if packer_bootstrap then
