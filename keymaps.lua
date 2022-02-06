@@ -10,7 +10,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Don't jump when using *
---nmap('*', '*<c-o>')
 map("n", "*", "*<C-o>", opts)
 
 -- Keep search matches in the middle of the window

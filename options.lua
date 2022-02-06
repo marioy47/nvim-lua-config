@@ -26,3 +26,4 @@ vim.opt.updatetime = 750         -- I have a modern machine. No need to wait tha
 vim.opt.shortmess:append("c")    -- Don't pass messages to |ins-completion-menu|.
 vim.opt.encoding = "utf-8"       -- Just in case
 
+vim.cmd[[colorscheme slate]]
