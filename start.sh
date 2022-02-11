@@ -5,4 +5,6 @@
 
 export XDG_CONFIG_HOME=./stdpath
 export XDG_DATA_HOME=./data
+export GOPATH=/opt/homebrew
+export GOBIN=/opt/homebrew/bin
 nvim -u init.lua $@

@@ -20,13 +20,18 @@ map("n", "N", "Nzzzv", opts)
 -- Toggle NetRW (Lexplore Sexplore)
 map("n", "<Leader>le", ":Lex 30<Cr>", opts)
 
--- Clear matches with Ctrl+l
+-- Clear matches with Ctrl+l or :Clear
 map("n", "<C-l>", ":noh<Cr>", opts)
-map("n", "<leader>cl", ":noh<Cr>", opts)
 
 -- Reselect visual block after indent/outdent
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
+
+-- YY/XX Copy/Cut into the system clipboard
+vim.cmd[[
+noremap YY "+y<CR>
+noremap XX "+x<CR>
+]]
 
 -- ESC to go to normal mode in terminal
 map("t", "<C-s>", "<C-\\><C-n>", opts)
