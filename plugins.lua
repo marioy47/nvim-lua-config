@@ -70,6 +70,13 @@ use { -- Configure LSP client and Use an LSP server installer.
       require('config.lsp')
     end
 }
+use { -- Prettify popups
+  'tami5/lspsaga.nvim',
+  requires = 'neovim/nvim-lspconfig',
+  config = function()
+  end
+}
+
 -- use { -- Completion engine
 --   'hrsh7th/nvim-cmp',
 --   requires = {
