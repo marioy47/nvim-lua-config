@@ -58,4 +58,16 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", expr)
 -- Needs Packer: Re-compile and clean plugins
 map("n", "<Leader>ps", ":PackerSync<CR>", opts)
 
+-- Material theme
+map('n', '<leader>mm', [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)
+map('n', '<leader>me', [[<Cmd>lua require('material.functions').toggle_eob()<CR>]], opts)
+
+
+-- Telescope
+map('n', 'ff', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
+map('n', 'fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+map('n', 'fb', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
+map('n', 'fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
+map('n', 'fs', '<cmd>lua require("telescope.builtin").git_status()<cr>', opts)
+
 -- vim: ts=2 sw=2 et

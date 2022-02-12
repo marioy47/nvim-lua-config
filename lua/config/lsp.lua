@@ -61,15 +61,12 @@ local settings = {
   }
 }
 
-
-
-
 -- Equivalent to lspconfig.<langserver>.setup{}
 lsp_installer.on_server_ready( function(server)
   server:setup({
     on_attach = on_attach,
     flags = flags,
-    settings = settings
+    settings = settings,
   })
 end)
 

@@ -19,21 +19,20 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   },
   sources = cmp.config.sources({
+    { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
+    { name = 'path' },
     { name = 'luasnip' }, -- For luasnip users.
-  }, {
-    { name = 'buffer' },
+    { name = 'buffer', keyword_length = 3 },
   }),
   documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
   experimental = {
-    ghost_text = false,
-    native_menu = false,
+    ghost_text = true,
   },
 })
 
---[[
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   sources = {
@@ -50,6 +49,7 @@ cmp.setup.cmdline(':', {
   })
 })
 
+--[[
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.

@@ -46,12 +46,12 @@ local use = packer.use
 use {-- Have packer manage itself
   "wbthomason/packer.nvim",
 }
-use { -- A bunch of plugins requires this 2
-  'nvim-lua/popup.nvim',
-  'nvim-lua/plenary.nvim',
-}
 use {-- Port of VSCode"s Tokio Night theme
   "folke/tokyonight.nvim",
+  config = function()
+    vim.g.tokyonight_style = "light"
+    vim.cmd("colorscheme tokyonight")
+  end
 }
 use {-- Port of VSCode"s Tokio Night theme
   "adrian5/oceanic-next-vim",
@@ -59,8 +59,9 @@ use {-- Port of VSCode"s Tokio Night theme
 use { -- A collection of themes: palenight, oceanic, deep ocean, darker, ligher
   'marko-cerovac/material.nvim',
   config = function()
-    vim.api.nvim_set_keymap('n', '<leader>mm', [[<Cmd>lua require('material.functions').toggle_style()<CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>me', [[<Cmd>lua require('material.functions').toggle_eob()<CR>]], { noremap = true, silent = true })
+    vim.g.material_style = "deep ocean"
+    -- vim.cmd("colorscheme material")
+    -- vim.cmd("colorscheme oceanicnext")
   end
 }
 use { -- Configure LSP client and Use an LSP server installer.
@@ -72,39 +73,47 @@ use { -- Configure LSP client and Use an LSP server installer.
 }
 use { -- Prettify popups
   'tami5/lspsaga.nvim',
-  requires = 'neovim/nvim-lspconfig',
+  requires = {
+    'neovim/nvim-lspconfig',
+    'kyazdani42/nvim-web-devicons',
+  },
   config = function()
   end
 }
 
--- use { -- Completion engine
---   'hrsh7th/nvim-cmp',
---   requires = {
---     'hrsh7th/cmp-nvim-lsp',
---     'hrsh7th/cmp-buffer',
---     'hrsh7th/cmp-path',
---     'L3MON4D3/LuaSnip',
---     'saadparwaiz1/cmp_luasnip'
---   },
---   config = function()
---     require('config.cmp')
---   end
--- }
-
-
-
-
-
-
-
-
-
-use {-- Enable gcc and gcb for comments
-  'numToStr/Comment.nvim',
+use { -- Completion engine
+  'hrsh7th/nvim-cmp',
+  requires = {
+    'hrsh7th/cmp-nvim-lsp', -- Queries the LSP for completions
+    'hrsh7th/cmp-buffer', -- Complete things for the current buffer
+    'hrsh7th/cmp-path', -- Complete filenames and paths
+    'hrsh7th/cmp-nvim-lua', -- Vim api functions
+    'hrsh7th/cmp-cmdline',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+  },
   config = function()
-    require('Comment').setup()
+    require('config.cmp')
   end
 }
+
+use {
+  'nvim-telescope/telescope.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim'
+  },
+  config = function()
+  end
+}
+
+
+
+
+
+
+
+
+
 --[[
   use { -- https://github.com/wbthomason/dotfiles/blob/linux/neovim/.config/nvim/lua/plugins.lua#L64
     {
@@ -153,13 +162,20 @@ use {-- Better status line
     require('config.lualine')
   end
 }
+]]
+
+use {-- Enable gcc and gcb for comments
+  'numToStr/Comment.nvim',
+  config = function()
+    require('Comment').setup()
+  end
+}
 use {
   'iamcco/markdown-preview.nvim',
   run = 'cd app && npm install',
   ft = { 'markdown' },
   cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' } -- Load on this commands
 }
-]]
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
