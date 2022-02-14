@@ -26,5 +26,3 @@ vim.opt.showmode = false         -- Remove the --INSERT-- message at the bottom
 vim.opt.updatetime = 750         -- I have a modern machine. No need to wait that long
 vim.opt.shortmess:append("c")    -- Don't pass messages to |ins-completion-menu|.
 vim.opt.encoding = "utf-8"       -- Just in case
-
-vim.cmd[[colorscheme slate]]

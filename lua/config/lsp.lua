@@ -2,8 +2,6 @@
 
 local lsp_installer = require('nvim-lsp-installer')
 
-local is_saga_present, _  = pcall(require, 'lspsaga')
-
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -34,8 +32,9 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
+  -- Verify if LspSaga is present and if it is, Reuse some keymaps.
+  local is_saga_present, _  = pcall(require, 'lspsaga')
   if is_saga_present then
-    local map = nvim_buf_set_keymap,
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<cmd>Lspsaga rename<cr>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gx", "<cmd>Lspsaga code_action<cr>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "x", "gx", ":<c-u>Lspsaga range_code_action<cr>", opts)
@@ -57,7 +56,15 @@ local flags = {
 local settings = {
   intelephense = {
     -- Add wordpress to the list of stubs
-    stubs = {"apache","bcmath","bz2","calendar","com_dotnet","Core","ctype","curl","date","dba","dom","enchant","exif","FFI","fileinfo","filter","fpm","ftp","gd","gettext","gmp","hash","iconv","imap","intl","json","ldap","libxml","mbstring","meta","mysqli","oci8","odbc","openssl","pcntl","pcre","PDO","pdo_ibm","pdo_mysql","pdo_pgsql","pdo_sqlite","pgsql","Phar","posix","pspell","readline","Reflection","session","shmop","SimpleXML","snmp","soap","sockets","sodium","SPL","sqlite3","standard","superglobals","sysvmsg","sysvsem","sysvshm","tidy","tokenizer","xml","xmlreader","xmlrpc","xmlwriter","xsl","Zend OPcache","zip","zlib", "wordpress"}
+    stubs = {"apache","bcmath","bz2","calendar","com_dotnet","Core","ctype","curl","date","dba","dom","enchant","exif","FFI","fileinfo","filter","fpm","ftp","gd","gettext","gmp","hash","iconv","imap","intl","json","ldap","libxml","mbstring","meta","mysqli","oci8","odbc","openssl","pcntl","pcre","PDO","pdo_ibm","pdo_mysql","pdo_pgsql","pdo_sqlite","pgsql","Phar","posix","pspell","readline","Reflection","session","shmop","SimpleXML","snmp","soap","sockets","sodium","SPL","sqlite3","standard","superglobals","sysvmsg","sysvsem","sysvshm","tidy","tokenizer","xml","xmlreader","xmlrpc","xmlwriter","xsl","Zend OPcache","zip","zlib", "wordpress"},
+    diagnostics = {
+      enable = false
+    }
+  },
+  Lua = {
+    diagnostics = {
+      globals = { 'vim' }
+    }
   }
 }
 

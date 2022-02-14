@@ -46,22 +46,28 @@ local use = packer.use
 use {-- Have packer manage itself
   "wbthomason/packer.nvim",
 }
-use {-- Port of VSCode"s Tokio Night theme
-  "folke/tokyonight.nvim",
-  config = function()
-    vim.g.tokyonight_style = "light"
-    vim.cmd("colorscheme tokyonight")
-  end
-}
-use {-- Port of VSCode"s Tokio Night theme
-  "adrian5/oceanic-next-vim",
-}
 use { -- A collection of themes: palenight, oceanic, deep ocean, darker, ligher
   'marko-cerovac/material.nvim',
   config = function()
     vim.g.material_style = "deep ocean"
-    -- vim.cmd("colorscheme material")
-    -- vim.cmd("colorscheme oceanicnext")
+  end
+}
+use {-- Port of VSCode"s Tokio Night theme
+  "folke/tokyonight.nvim",
+  config = function()
+    vim.g.tokyonight_style = "light"
+  end
+}
+use {-- Port of VSCode"s Tokio Night theme
+  "adrian5/oceanic-next-vim",
+  config = function()
+    vim.g.oceanic_transparent_bg = 1
+  end
+}
+use {-- Enable gcc and gcb for comments
+  'numToStr/Comment.nvim',
+  config = function()
+    require('Comment').setup()
   end
 }
 use { -- Configure LSP client and Use an LSP server installer.
@@ -71,16 +77,6 @@ use { -- Configure LSP client and Use an LSP server installer.
       require('config.lsp')
     end
 }
-use { -- Prettify popups
-  'tami5/lspsaga.nvim',
-  requires = {
-    'neovim/nvim-lspconfig',
-    'kyazdani42/nvim-web-devicons',
-  },
-  config = function()
-  end
-}
-
 use { -- Completion engine
   'hrsh7th/nvim-cmp',
   requires = {
@@ -91,61 +87,66 @@ use { -- Completion engine
     'hrsh7th/cmp-cmdline',
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
+    'onsails/lspkind-nvim',
   },
   config = function()
     require('config.cmp')
   end
 }
-
+use {
+  'nvim-treesitter/nvim-treesitter',
+  run = ':TSUpdate',
+  config = function()
+    require('nvim-treesitter.configs').setup({
+      vim.cmd[[
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+      ]]
+    })
+  end
+}
+use {
+  'mfussenegger/nvim-lint',
+  config = function()
+    require('config.lint')
+  end
+}
 use {
   'nvim-telescope/telescope.nvim',
   requires = {
-    'nvim-lua/plenary.nvim'
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope-frecency.nvim', -- Better sorting algorithm
+    'tami5/sqlite.lua', -- required by fequency
+    'nvim-telescope/telescope-file-browser.nvim',
+    'nvim-telescope/telescope-packer.nvim',
+    'nvim-telescope/telescope-ui-select.nvim',
+    -- 'nvim-telescope/telescope-fzf-native.nvim', -- Better file search
+  },
+  config = function()
+    require('config.telescope')
+  end
+}
+use {
+  'nvim-telescope/telescope-fzf-native.nvim',
+  requires = {
+    'nvim-telescope/telescope.nvim',
+  },
+  run = 'make',
+  config = function()
+    require('telescope').load_extension('fzf')
+  end
+}
+--[[
+use { -- Prettify popups
+  'tami5/lspsaga.nvim',
+  requires = {
+    'neovim/nvim-lspconfig',
+    'kyazdani42/nvim-web-devicons',
   },
   config = function()
   end
 }
-
-
-
-
-
-
-
-
-
---[[
-  use { -- https://github.com/wbthomason/dotfiles/blob/linux/neovim/.config/nvim/lua/plugins.lua#L64
-    {
-      'nvim-telescope/telescope.nvim',
-      requires = {
-        'nvim-lua/popup.nvim',
-        'nvim-lua/plenary.nvim',
-        'telescope-frecency.nvim',
-        'telescope-fzf-native.nvim',
-      },
-      wants = {
-        'popup.nvim',
-        'plenary.nvim',
-        'telescope-frecency.nvim',
-        'telescope-fzf-native.nvim',
-      },
-      setup = [[require('config.telescope_setup')] ],
-      config = [[require('config.telescope')] ],
-      cmd = 'Telescope',
-      module = 'telescope',
-    },
-    {
-      'nvim-telescope/telescope-frecency.nvim',
-      after = 'telescope.nvim',
-      requires = 'tami5/sqlite.lua',
-    },
-    {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'make',
-    },
-  }
-    use { 'hrsh7th/cmp-nvim-lsp' }
+--]]
 use {
   'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines
   config = function()
@@ -162,20 +163,17 @@ use {-- Better status line
     require('config.lualine')
   end
 }
-]]
-
-use {-- Enable gcc and gcb for comments
-  'numToStr/Comment.nvim',
-  config = function()
-    require('Comment').setup()
-  end
-}
 use {
   'iamcco/markdown-preview.nvim',
   run = 'cd app && npm install',
   ft = { 'markdown' },
   cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' } -- Load on this commands
 }
+use {
+  'sheerun/vim-polyglot'
+}
+--[[
+--]]
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
