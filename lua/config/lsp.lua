@@ -32,22 +32,9 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-  -- Verify if LspSaga is present and if it is, Reuse some keymaps.
-  local is_saga_present, _  = pcall(require, 'lspsaga')
-  if is_saga_present then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<cmd>Lspsaga rename<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gx", "<cmd>Lspsaga code_action<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "x", "gx", ":<c-u>Lspsaga range_code_action<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K",  "<cmd>Lspsaga hover_doc<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
-  end
-
 end
 
+-- Remove this in nvim 0.7
 local flags = {
   debounce_text_changes = 150
 }
@@ -68,7 +55,7 @@ local settings = {
   }
 }
 
--- Equivalent to lspconfig.<langserver>.setup{}
+-- Equivalent (but not equal) to lspconfig.<langserver>.setup{}
 lsp_installer.on_server_ready( function(server)
   server:setup({
     on_attach = on_attach,
@@ -76,5 +63,32 @@ lsp_installer.on_server_ready( function(server)
     settings = settings,
   })
 end)
+
+-- Auto install servers
+local servers = {
+  "bashls", "dockerls", "grammarly",
+  "jsonls", "sumneko_lua", "yamlls",
+}
+for _, name in pairs(servers) do
+  local is_server_found, server = lsp_installer.get_server(name)
+  if is_server_found and not server:is_installed() then
+    print("Installing " .. name)
+    server:install()
+  end
+end
+
+--Rounded borders (:help vim.lsp.handlers.hover)
+ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+   vim.lsp.handlers.hover, {
+     -- Use a sharp border with `FloatBorder` highlights
+     border = "rounded"
+   }
+ )
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+ vim.lsp.handlers.signature_help, {
+   -- Use a sharp border with `FloatBorder` highlights
+   border = "rounded"
+ }
+)
 
 -- vim: ts=2 sw=2 et

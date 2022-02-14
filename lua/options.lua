@@ -21,7 +21,7 @@ vim.opt.cursorline = true       -- Highlight the current cursor line (Can slow t
 vim.opt.signcolumn = "yes"      -- Always show the signcolumn, otherwise it would shift the text
 vim.opt.hidden = true           -- Allow multple buffers
 -- vim.opt.completeopt = { "menuone" , "noinsert" , "noselect" } -- Let the user decide about the autocomplete
-vim.opt.completeopt = { "menu" , "menuone" , "noselect" } -- Let the user decide about the autocomplete
+vim.opt.completeopt = { "menu" , "menuone" , "noselect", "noinsert" } -- Let the user decide about the autocomplete
 vim.opt.showmode = false         -- Remove the --INSERT-- message at the bottom
 vim.opt.updatetime = 750         -- I have a modern machine. No need to wait that long
 vim.opt.shortmess:append("c")    -- Don't pass messages to |ins-completion-menu|.

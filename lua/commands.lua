@@ -16,16 +16,13 @@ augroup vimrc-remember-cursor-position
 augroup END
 ]]
 
--- If NeoVim is open without parammeter, start NetRw on curren dir
+-- If NeoVim is opened without parammeter, start NetRw on curren dir
 vim.cmd[[
 augroup netrw-auto-open-if-no-params
   autocmd!
   autocmd VimEnter * if argc() == 0 | Explore! | endif
 augroup END
 ]]
-
--- :Clear command to remove any active highlight
-vim.cmd("command! Clear execute 'noh'")
 
 -- :Format command to format code using LSP
 vim.cmd("command! Format execute 'lua vim.lsp.buf.formatting()'")
@@ -37,3 +34,19 @@ vim.cmd("command! Actions execute 'lua vim.lsp.buf.code_action()'")
 vim.cmd("au BufWritePost <buffer> lua require('lint').try_lint()")
 vim.cmd[[command! Lint execute "lua require('lint').try_lint()"]]
 
+
+-- Remove all trailing whitespace on save
+vim.api.nvim_exec([[
+  augroup trim-white-space-on-save
+    au!
+    autocmd BufWritePre * :%s/\s\+$//e
+  augroup END
+  ]], false)
+
+-- Prevent new line to also start with a comment
+vim.api.nvim_exec([[
+  augroup disable-comments-on-new-lines
+    au!
+    au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  augroup END
+  ]], false)
