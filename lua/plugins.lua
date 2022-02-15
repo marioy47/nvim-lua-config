@@ -65,6 +65,9 @@ use {-- Adaptation of the Sublime Text theme for vim.
     vim.g.oceanic_italic_comments = 1
   end
 }
+use {
+  'EdenEast/nightfox.nvim',
+}
 use {-- Fast commenting! Enable gcc and gcb for comments
   'numToStr/Comment.nvim',
   config = function()
@@ -129,6 +132,15 @@ use { -- Find files, buffers, keys, etc with :Telescope <command>
   config = function()
     require('config.telescope')
   end
+}
+use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    config = function()
+      require('config.nvim-tree')
+    end
 }
 use { -- Use FZF for faster file search (didn't work as telescope requierement).
   'nvim-telescope/telescope-fzf-native.nvim',

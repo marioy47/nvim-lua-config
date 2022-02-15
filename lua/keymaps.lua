@@ -67,6 +67,9 @@ map('n', '<C-k><C-l>', '<cmd>lua require("telescope.builtin").buffers()<cr>', op
 map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").git_status()<cr>', opts)
 map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
-map('n', '<leader>fb', '<cmd>Telescope file_browser<cr>', opts)
+-- map('n', '<leader>fb', '<cmd>Telescope file_browser<cr>', opts)
 
+-- Nvim-Tree
+map('n', '<C-k><C-k>', '<cmd>NvimTreeToggle<cr>', opts)
+map('n', '<C-k><C-f>', '<cmd>NvimTreeFindFile<cr>', opts)
 -- vim: ts=2 sw=2 et

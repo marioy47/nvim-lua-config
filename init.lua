@@ -1,15 +1,8 @@
 -- init.lua
 
 -- Setup the color at start
-vim.cmd[[silent! colorscheme tokyonight]]
-vim.g.vimwiki_list = {
-  {
-    path = '~/.vimwiki/',
-    syntax = 'markdown',
-    ext = '.md'
-  }
-}
-
+vim.cmd[[silent! colorscheme nightfox]]
+-- vim.cmd[[silent! colorscheme tokyonight]]
 require("options")
 require("keymaps")
 require("commands")
