@@ -72,4 +72,5 @@ map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").diagnostics()<cr>'
 -- Nvim-Tree
 map('n', '<C-k><C-k>', '<cmd>NvimTreeToggle<cr>', opts)
 map('n', '<C-k><C-f>', '<cmd>NvimTreeFindFile<cr>', opts)
+
 -- vim: ts=2 sw=2 et

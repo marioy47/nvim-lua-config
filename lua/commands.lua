@@ -49,4 +49,9 @@ vim.api.nvim_exec([[
     au!
     au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   augroup END
-  ]], false)
+]], false)
+
+-- :Git opens NeoGit on the sidebar
+vim.cmd[[command! Git execute "lua require('neogit').open({ kind = 'vsplit'})"]]
+
+-- vim: ts=2 sw=2 et

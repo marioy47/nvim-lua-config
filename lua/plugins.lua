@@ -137,6 +137,20 @@ use {
       require('config.nvim-tree')
     end
 }
+use {
+  'TimUntersberger/neogit',
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'sindrets/diffview.nvim'
+  },
+  config = function()
+    require('neogit').setup{
+      integrations = {
+        diffview = true
+      }
+    }
+  end
+}
 use { -- Use FZF for faster file search (didn't work as telescope requierement).
   'nvim-telescope/telescope-fzf-native.nvim',
   requires = {
