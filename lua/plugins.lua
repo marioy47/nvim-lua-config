@@ -103,12 +103,7 @@ use { -- Install and configure treesitter languages
   'nvim-treesitter/nvim-treesitter',
   run = ':TSUpdate',
   config = function()
-    require('nvim-treesitter.configs').setup({
-      vim.cmd[[
-        set foldmethod=expr
-        set foldexpr=nvim_treesitter#foldexpr()
-      ]]
-    })
+    require('config.nvim-treesitter')
   end
 }
 use { -- Connect external linters (phpcs, black) to LSP
@@ -174,9 +169,9 @@ use { -- Preview current markdown file with :MarkdownPreview
   ft = { 'markdown' },
   cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' } -- Load on this commands
 }
-use { -- Better hightlighting
-  'sheerun/vim-polyglot'
-}
+-- use { -- Better hightlighting
+--   'sheerun/vim-polyglot'
+-- }
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins

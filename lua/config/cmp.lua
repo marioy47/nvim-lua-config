@@ -4,7 +4,15 @@ local cmp = require'cmp'
 local formatting = nil
 local is_lspkind_present, lspkind = pcall(require, 'lspkind')
 if is_lspkind_present then
-  formatting = {format = lspkind.cmp_format({with_text = true, maxwidth = 50})}
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = true,
+      maxwidth = 50,
+      before = function(entry, vim_item)
+        return vim_item
+      end
+    })
+  }
 end
 
 cmp.setup({
