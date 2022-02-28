@@ -68,7 +68,6 @@ use({ -- Another cool dark theme
 use({
 	"projekt0n/github-nvim-theme",
 })
-
 use({ -- Install and configure treesitter languages
 	"nvim-treesitter/nvim-treesitter",
 	run = ":TSUpdate",
@@ -104,10 +103,6 @@ use({ -- Completion engine
     require("config.cmp")
   end,
 })
-
-
-
---[[
 use({
   "jose-elias-alvarez/null-ls.nvim",
   requires = {
@@ -117,6 +112,12 @@ use({
     require("config.null-ls")
   end,
 })
+use({
+  "gpanders/editorconfig.nvim"
+})
+
+
+--[[
 use {
   "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",

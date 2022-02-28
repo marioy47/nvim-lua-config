@@ -4,17 +4,17 @@ local null_ls = require('null-ls')
 local utils = require("null-ls.utils")
 
 null_ls.setup({
+    root_dir = utils.root_pattern("composer.json", "package.json", "Makefile", ".git"),
+    diagnostics_format = "#{m} (#{c}) [#{s}]",
 	sources = {
 		null_ls.builtins.completion.spell,
-		null_ls.builtins.diagnostics.eslint, -- Ditto: npm instal eslint
+		null_ls.builtins.diagnostics.eslint,
 		null_ls.builtins.diagnostics.phpcs.with({
-			command = "./vendor/bin/phpcs", -- composer install phpcs --dev
-            root_dir =  utils.root_pattern(".null-ls-root", "composer.json", "composer.lock", ".git"),
+            prefer_local = "vendor/bin",
         }),
 		null_ls.builtins.formatting.stylua, -- You need to install stylue first: brew install stylua
 		null_ls.builtins.formatting.phpcbf.with({
-			command = "./vendor/bin/phpcbf", -- composer install phpcs --dev
-            root_dir =  utils.root_pattern(".null-ls-root", "composer.json", "composer.lock", ".git"),
+            prefer_local = "vendor/bin",
 		}),
 	},
 })
