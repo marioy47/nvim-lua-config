@@ -63,20 +63,32 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", expr)
 map("n", "<leader>mm", [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)
 map("n", "<leader>me", [[<Cmd>lua require('material.functions').toggle_eob()<CR>]], opts)
 
--- LSP Additional
-vim.api.nvim_buf_set_keymap(0, 'n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-
--- Telescope
-map("n", "<leader>ff", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
-map("n", "<leader>fg", "<cmd>lua require(\"telescope.builtin\").live_grep()<cr>", opts)
-map("n", "<leader>fu", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
-map("n", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
-map("n", "<leader>fh", "<cmd>lua require(\"telescope.builtin\").help_tags()<cr>", opts)
-map("n", "<leader>fs", "<cmd>lua require(\"telescope.builtin\").git_status()<cr>", opts)
-map("n", "<leader>fd", "<cmd>lua require(\"telescope.builtin\").diagnostics()<cr>", opts)
+-- LSP
+map("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+map("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+vim.api.nvim_buf_set_keymap(0, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 
 -- Nvim-Tree
 map("n", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
 map("n", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
+
+-- Trouble
+map("n", "xx", "<cmd>TroubleToggle<cr>", opts)
+map("n", "xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+map("n", "xd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+map("n", "xl", "<cmd>TroubleToggle loclist<cr>", opts)
+map("n", "q", "<cmd>TroubleToggle quickfix<cr>", opts)
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", opts)
+
+-- Telescope
+map("n", "tt", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
+map("n", "tg", "<cmd>lua require(\"telescope.builtin\").live_grep()<cr>", opts)
+map("n", "tb", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
+map("n", "tl", "<cmd>lua require(\"telescope.builtin\").help_tags()<cr>", opts)
+map("n", "ts", "<cmd>lua require(\"telescope.builtin\").git_status()<cr>", opts)
+map("n", "td", "<cmd>lua require(\"telescope.builtin\").diagnostics()<cr>", opts)
+
 
 -- vim: ts=2 sw=2 et

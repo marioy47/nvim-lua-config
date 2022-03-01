@@ -87,44 +87,46 @@ use({ -- Configure LSP client and Use an LSP server installer.
 	end,
 })
 use({ -- Completion engine
-  "hrsh7th/nvim-cmp",
-  requires = {
-		"onsails/lspkind-nvim",     -- Icons on the popups
-    "hrsh7th/cmp-nvim-lsp",     -- LSP source for nvim-cmp
-    "saadparwaiz1/cmp_luasnip", -- Snippets source
-    "L3MON4D3/LuaSnip",         -- Snippet engine
-
-    -- "hrsh7th/cmp-buffer",       -- Complete things for the current buffer
-    -- "hrsh7th/cmp-path",         -- Complete filenames and paths
-    -- "hrsh7th/cmp-nvim-lua",     -- Vim api functions
-    -- "hrsh7th/cmp-cmdline",      -- Complete when using :
-  },
-  config = function()
-    require("config.cmp")
-  end,
+	"hrsh7th/nvim-cmp",
+	requires = {
+		"onsails/lspkind-nvim", -- Icons on the popups
+		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+		"saadparwaiz1/cmp_luasnip", -- Snippets source
+		"L3MON4D3/LuaSnip", -- Snippet engine
+	},
+	config = function()
+		require("config.cmp")
+	end,
 })
 use({
-  "jose-elias-alvarez/null-ls.nvim",
-  requires = {
-    "nvim-lua/plenary.nvim",
-  },
-  config = function()
-    require("config.null-ls")
-  end,
+	"jose-elias-alvarez/null-ls.nvim",
+	requires = {
+		"nvim-lua/plenary.nvim",
+	},
+	config = function()
+		require("config.null-ls")
+	end,
 })
 use({
-  "gpanders/editorconfig.nvim"
+	"gpanders/editorconfig.nvim",
 })
-
+-- Lua
+use({
+	"folke/trouble.nvim",
+	requires = "kyazdani42/nvim-web-devicons",
+	config = function()
+		require("trouble").setup({})
+	end,
+})
+use({
+	"nvim-telescope/telescope.nvim",
+	requires = { { "nvim-lua/plenary.nvim" } },
+	config = function()
+    require('config.telescope')
+	end,
+})
 
 --[[
-use {
-  "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {}
-  end
-}
 use({ -- Find files, buffers, keys, etc with :Telescope <command>
   "nvim-telescope/telescope.nvim",
   requires = {
