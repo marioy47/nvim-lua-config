@@ -58,7 +58,7 @@ local settings = {
 			"meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql",
 			"Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL",
 			"sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter",
-			"xsl", "Zend OPcache", "zip", "zlib", "wordpress",
+			"xsl", "Zend OPcache", "zip", "zlib", "wordpress", "phpunit",
 		},
 		diagnostics = {
 			enable = true,
@@ -134,5 +134,3 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
--- vim: ts=2 sw=2 et

@@ -11,7 +11,3 @@ nightfox.setup({
 		functions = "italic,bold", -- styles can be a comma separated list
 	},
 })
-
--- nightfox.load()
-
--- vim: ts=2 sw=2 et

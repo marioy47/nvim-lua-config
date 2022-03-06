@@ -65,7 +65,7 @@ use({ -- Another cool dark theme
 		require("config.nightfox")
 	end,
 })
-use({
+use({ -- GitHub inspired theme. Supports light and dark
 	"projekt0n/github-nvim-theme",
 })
 use({ -- Install and configure treesitter languages
@@ -86,7 +86,7 @@ use({ -- Configure LSP client and Use an LSP server installer.
 		require("config.lsp")
 	end,
 })
-use({ -- Completion engine
+use({ -- CMP completion engine
 	"hrsh7th/nvim-cmp",
 	requires = {
 		"onsails/lspkind-nvim", -- Icons on the popups
@@ -98,7 +98,7 @@ use({ -- Completion engine
 		require("config.cmp")
 	end,
 })
-use({
+use({ -- Null-LS Use external formatters and linters
 	"jose-elias-alvarez/null-ls.nvim",
 	requires = {
 		"nvim-lua/plenary.nvim",
@@ -107,101 +107,71 @@ use({
 		require("config.null-ls")
 	end,
 })
-use({
+use({ -- Support for .editorconfig files
 	"gpanders/editorconfig.nvim",
 })
--- Lua
-use({
+use({ -- Trouble: pretty diagnostics
 	"folke/trouble.nvim",
 	requires = "kyazdani42/nvim-web-devicons",
 	config = function()
 		require("trouble").setup({})
 	end,
 })
-use({
+use({ -- Telescope: The swiws army knife of searching
 	"nvim-telescope/telescope.nvim",
-	requires = { { "nvim-lua/plenary.nvim" } },
+	requires = {
+		"nvim-lua/plenary.nvim",
+		{
+			"nvim-telescope/telescope-frecency.nvim", -- Better sorting algorithm
+			"tami5/sqlite.lua",
+		},
+	},
 	config = function()
-    require('config.telescope')
+		require("config.telescope")
 	end,
 })
-
---[[
-use({ -- Find files, buffers, keys, etc with :Telescope <command>
-  "nvim-telescope/telescope.nvim",
-  requires = {
-    "nvim-lua/plenary.nvim",
-    { "kyazdani42/nvim-web-devicons", opt = true },
-    "nvim-telescope/telescope-frecency.nvim", -- Better sorting algorithm
-    "tami5/sqlite.lua", -- required by fequency
-    "nvim-telescope/telescope-file-browser.nvim",
-    "nvim-telescope/telescope-packer.nvim",
-    "nvim-telescope/telescope-ui-select.nvim",
-    -- 'nvim-telescope/telescope-fzf-native.nvim', -- Better file search
-  },
-  config = function()
-    require("config.telescope")
-  end,
+use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
+	"lewis6991/gitsigns.nvim",
+	requires = { "nvim-lua/plenary.nvim" },
+	config = function()
+		require("config.gitsigns")
+	end,
 })
-use({
-  "kyazdani42/nvim-tree.lua",
-  requires = {
-    "kyazdani42/nvim-web-devicons", -- optional, for file icon
-  },
-  config = function()
-    require("config.nvim-tree")
-  end,
+use({ -- Show "blame" information for git tracked files
+	"f-person/git-blame.nvim",
+	config = function()
+		require("config.git-blame")
+	end,
 })
-use({
-  "TimUntersberger/neogit",
-  requires = {
-    "nvim-lua/plenary.nvim",
-    "sindrets/diffview.nvim",
-  },
-  config = function()
-    require("neogit").setup({
-      integrations = {
-        diffview = true,
-      },
-    })
-  end,
+use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
+	"kyazdani42/nvim-tree.lua",
+	requires = {
+		"kyazdani42/nvim-web-devicons", -- optional, for file icon
+	},
+	config = function()
+		require("config.nvim-tree")
+	end,
 })
-use({
-  "f-person/git-blame.nvim",
-  config = function()
-    vim.g.gitblame_enabled = 1
-  end,
-})
-use({ -- Use FZF for faster file search (didn't work as telescope requierement).
-  "nvim-telescope/telescope-fzf-native.nvim",
-  requires = {
-    "nvim-telescope/telescope.nvim",
-  },
-  run = "make",
-  config = function()
-    require("telescope").load_extension("fzf")
-  end,
+use({ -- Floating terminal with C-k C-t
+	"akinsho/toggleterm.nvim",
+	config = function()
+		require("config.toggleterm")
+	end,
 })
 use({ -- Add indentation guides even on blank lines
-  "lukas-reineke/indent-blankline.nvim",
-  config = function()
-    vim.g.indent_blankline_char = "┊"
-    vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
-    vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-    vim.g.indent_blankline_show_trailing_blankline_indent = false
-  end,
+	"lukas-reineke/indent-blankline.nvim",
+	config = function()
+		require("config.indent-blankline")
+	end,
 })
 use({ -- Make the status line beautiful
-  "nvim-lualine/lualine.nvim",
-  requires = { "kyazdani42/nvim-web-devicons", opt = true },
-  config = function()
-    require("config.lualine")
-  end,
+	"nvim-lualine/lualine.nvim",
+	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	config = function()
+		require("config.lualine")
+	end,
 })
-
---]]
-
-use({
+use({ -- Whichkey: popup help for keymaps
 	"folke/which-key.nvim",
 	config = function()
 		require("config.which-key")
@@ -213,8 +183,11 @@ use({ -- Fast commenting! Enable gcc and gcb for comments
 		require("Comment").setup()
 	end,
 })
-use({
+use({ -- Align items with `:SimpleAlign --` for instance
 	"kg8m/vim-simple-align",
+})
+use({
+	"jremmen/vim-ripgrep",
 })
 use({ -- Preview current markdown file with :MarkdownPreview
 	"iamcco/markdown-preview.nvim",
@@ -228,5 +201,3 @@ use({ -- Preview current markdown file with :MarkdownPreview
 if PACKER_BOOTSTRAP then
 	require("packer").sync()
 end
-
--- vim: ts=2 sw=2 et

@@ -54,12 +54,10 @@ cmp.setup({
 			},
 		}),
 	},
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  },
-  experimental = {
-    ghost_text = true,
-  },
+	documentation = {
+		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	},
+	experimental = {
+		ghost_text = true,
+	},
 })
-
--- vim: ts=2 sw=2 et

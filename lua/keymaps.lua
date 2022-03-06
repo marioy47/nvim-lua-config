@@ -59,36 +59,34 @@ map("x", "K", ":move '<-2<CR>gv-gv", opts)
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", expr)
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", expr)
 
--- Only works on  Material Theme: Toggle themes with <leader+mm>, Change style with <Leader+me>
-map("n", "<leader>mm", [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)
-map("n", "<leader>me", [[<Cmd>lua require('material.functions').toggle_eob()<CR>]], opts)
-
--- LSP
-map("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+-- Diagnostics
+-- map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-map("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-vim.api.nvim_buf_set_keymap(0, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+-- map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+
+-- Trouble
+map("n", "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+map("n", "<leader>da", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+-- map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", opts)
+-- map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", opts)
+-- map("n", "<leader>gR", "<cmd>TroubleToggle lsp_references<cr>", opts)
+
+-- Telescope
+map("n", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
+map("i", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
+map("n", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
+map("i", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
+-- map("n", "<C-k><C-u>", "<cmd>Telescope<cr>", opts)
+-- map("i", "<C-k><C-u>", "<cmd>Telescope<cr>", opts)
+
+-- map("n", "<leader>tg", "<cmd>lua require(\"telescope.builtin\").live_grep()<cr>", opts)
+-- map("n", "<leader>tl", "<cmd>lua require(\"telescope.builtin\").help_tags()<cr>", opts)
+-- map("n", "<leader>ts", "<cmd>lua require(\"telescope.builtin\").git_status()<cr>", opts)
+-- map("n", "<leader>td", "<cmd>lua require(\"telescope.builtin\").diagnostics()<cr>", opts)
 
 -- Nvim-Tree
 map("n", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
+map("i", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
 map("n", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
-
--- Trouble
-map("n", "xx", "<cmd>TroubleToggle<cr>", opts)
-map("n", "xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
-map("n", "xd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
-map("n", "xl", "<cmd>TroubleToggle loclist<cr>", opts)
-map("n", "q", "<cmd>TroubleToggle quickfix<cr>", opts)
-map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", opts)
-
--- Telescope
-map("n", "tt", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
-map("n", "tg", "<cmd>lua require(\"telescope.builtin\").live_grep()<cr>", opts)
-map("n", "tb", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
-map("n", "tl", "<cmd>lua require(\"telescope.builtin\").help_tags()<cr>", opts)
-map("n", "ts", "<cmd>lua require(\"telescope.builtin\").git_status()<cr>", opts)
-map("n", "td", "<cmd>lua require(\"telescope.builtin\").diagnostics()<cr>", opts)
-
-
--- vim: ts=2 sw=2 et
+map("i", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)

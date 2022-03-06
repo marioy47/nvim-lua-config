@@ -9,7 +9,7 @@ require("nvim-treesitter.configs").setup({
 		additional_vim_regex_highlighting = false,
 	},
 	indent = {
-		enable = false, -- keep an eye on this. looks like is buggy
+		enable = true, -- keep an eye on this. looks like is buggy
 	},
 	incremental_selection = {
 		enable = true,
@@ -36,5 +36,3 @@ vim.cmd([[
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
 ]])
-
--- vim: ts=2 sw=2 et
