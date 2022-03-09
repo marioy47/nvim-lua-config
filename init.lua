@@ -2,11 +2,15 @@
 
 vim.g.lsp_servers = {
 	"bashls",
-	"grammarly",
+	"emmet_ls",
+	--"grammarly",
 	"jsonls",
 	"sumneko_lua",
+	"tsserver",
 	"yamlls",
-	"javascript",
+    "cssls",
+    "html",
+    "intelephense"
 }
 
 -- Vim native options. Make it more modern

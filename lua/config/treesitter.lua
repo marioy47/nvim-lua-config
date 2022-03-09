@@ -6,13 +6,13 @@ require("nvim-treesitter.configs").setup({
 	sync_installed = true,
 	highlight = {
 		enable = true, -- This is a MUST
-		additional_vim_regex_highlighting = false,
+		additional_vim_regex_highlighting = { "php" },
 	},
 	indent = {
-		enable = true, -- keep an eye on this. looks like is buggy
+		enable = false, -- Really breaks stuff if true
 	},
 	incremental_selection = {
-		enable = true,
+		enable = true, -- Enable selection of CODE blocks
 		keymaps = {
 			init_selection = "gnn",
 			node_incremental = "grn",

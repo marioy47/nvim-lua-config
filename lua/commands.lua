@@ -46,10 +46,10 @@ vim.api.nvim_exec(
 	false
 )
 
+-- Diagnostics info in the LSP popup. (No need to use `D`)
+vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
+
 -- Material Theme
--- Only works on  Material Theme: Toggle themes with <leader+mm>, Change style with <Leader+me>
--- map("n", "<leader>mm", [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)
--- map("n", "<leader>me", [[<Cmd>lua require('material.functions').toggle_eob()<CR>]], opts)
 vim.cmd([[command! MaterialToggle execute "lua require('material.functions').toggle_style()"]])
 
 -- :Git opens NeoGit on the sidebar
@@ -65,7 +65,3 @@ vim.cmd("command! Format execute 'lua vim.lsp.buf.formatting()'")
 
 -- :Actions command to execute LSP's code_action() function
 vim.cmd("command! Actions execute 'lua vim.lsp.buf.code_action()'")
-
--- Diagnostics info in the LSP popup. (No need to use `D`)
--- vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
-vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])

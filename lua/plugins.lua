@@ -46,7 +46,7 @@ local use = packer.use
 
 --[[
   Start adding plugins here
-]]
+--]]
 use({ -- Have packer manage itself
 	"wbthomason/packer.nvim",
 })
@@ -98,6 +98,7 @@ use({ -- CMP completion engine
 		require("config.cmp")
 	end,
 })
+-- [[
 use({ -- Null-LS Use external formatters and linters
 	"jose-elias-alvarez/null-ls.nvim",
 	requires = {
@@ -106,9 +107,6 @@ use({ -- Null-LS Use external formatters and linters
 	config = function()
 		require("config.null-ls")
 	end,
-})
-use({ -- Support for .editorconfig files
-	"gpanders/editorconfig.nvim",
 })
 use({ -- Trouble: pretty diagnostics
 	"folke/trouble.nvim",
@@ -125,6 +123,9 @@ use({ -- Telescope: The swiws army knife of searching
 			"nvim-telescope/telescope-frecency.nvim", -- Better sorting algorithm
 			"tami5/sqlite.lua",
 		},
+		"nvim-telescope/telescope-ui-select.nvim",
+		"nvim-telescope/telescope-node-modules.nvim",
+        "nvim-telescope/telescope-live-grep-raw.nvim",
 	},
 	config = function()
 		require("config.telescope")
@@ -137,11 +138,35 @@ use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tr
 		require("config.gitsigns")
 	end,
 })
+use({
+	"TimUntersberger/neogit",
+	requires = {
+		"nvim-lua/plenary.nvim",
+        "sindrets/diffview.nvim"
+	},
+	config = function()
+		require("config.neogit")
+	end,
+})
 use({ -- Show "blame" information for git tracked files
 	"f-person/git-blame.nvim",
 	config = function()
 		require("config.git-blame")
 	end,
+})
+use {
+  'pwntester/octo.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
+    'kyazdani42/nvim-web-devicons',
+  },
+  config = function ()
+    require"octo".setup()
+  end
+}
+use({ -- Support for .editorconfig files
+	"gpanders/editorconfig.nvim",
 })
 use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
 	"kyazdani42/nvim-tree.lua",
@@ -186,15 +211,20 @@ use({ -- Fast commenting! Enable gcc and gcb for comments
 use({ -- Align items with `:SimpleAlign --` for instance
 	"kg8m/vim-simple-align",
 })
-use({
-	"jremmen/vim-ripgrep",
-})
 use({ -- Preview current markdown file with :MarkdownPreview
 	"iamcco/markdown-preview.nvim",
 	run = "cd app && npm install",
 	ft = { "markdown" },
 	cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
+use({ -- Shows you inside your `packaje.json` which packages can be upgraded
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+    config = function ()
+        require('package-info').setup()
+    end
+})
+--]]
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
