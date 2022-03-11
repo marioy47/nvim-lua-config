@@ -1,3 +1,5 @@
 # .stylua.lua
 
 quote_style = "ForceDouble"
+indent_type = "Spaces"
+

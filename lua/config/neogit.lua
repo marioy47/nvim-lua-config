@@ -1,8 +1,8 @@
 -- lua/config/neogit.lua
 
-require('neogit').setup({
+require("neogit").setup({
     kind = "vsplit",
     integrations = {
-        diffview = true
-    }
+        diffview = true,
+    },
 })

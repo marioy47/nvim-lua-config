@@ -1,4 +1,4 @@
 require("toggleterm").setup({
-	open_mapping = [[<C-k><C-t>]],
-	size = 40,
+    open_mapping = [[<C-k><C-t>]],
+    size = 40,
 })

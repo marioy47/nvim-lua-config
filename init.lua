@@ -1,16 +1,16 @@
 -- init.lua
 
 vim.g.lsp_servers = {
-	"bashls",
-	"emmet_ls",
-	--"grammarly",
-	"jsonls",
-	"sumneko_lua",
-	"tsserver",
-	"yamlls",
+    "bashls",
+    "emmet_ls",
+    --"grammarly",
+    "jsonls",
+    "sumneko_lua",
+    "tsserver",
+    "yamlls",
     "cssls",
     "html",
-    "intelephense"
+    "intelephense",
 }
 
 -- Vim native options. Make it more modern

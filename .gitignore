@@ -2,3 +2,5 @@
 data/nvim
 stdpath/nvim/plugin
 plugin
+node_modules
+spell/*.spl

@@ -2,8 +2,8 @@
 
 Here is the Work in Progress to configure NeoVim as the perfect IDE for WordPress development
 
-
 ## TODO
+
 - [x] Use PHPCS for diagnostics
 - [x] Make markdown wrap
 - [x] Auto install `jsonls`, `yaml`, `dockerls`, `sumneko_lua`, `bashls`, `gramarly`
