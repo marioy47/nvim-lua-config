@@ -1,4 +1,4 @@
--- config/lsp.lua
+-- lua/config/lsp.lua
 
 local lsp_installer = require("nvim-lsp-installer")
 local lspkind = require("lspkind")
@@ -47,44 +47,44 @@ local flags = {
     debounce_text_changes = 150,
 }
 
--- stylua: ignore start
 -- Pass configurations settings to the different LSP's
 local settings = {
-	intelephense = {
-		-- Add wordpress to the list of stubs
-		stubs = {
-			"apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date", "dba", "dom", "enchant", "exif", "FFI",
-			"fileinfo", "filter", "fpm", "ftp", "gd", "gettext", "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring",
-			"meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql",
-			"Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL",
-			"sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter",
-			"xsl", "Zend OPcache", "zip", "zlib", "wordpress", "phpunit",
-		},
-		diagnostics = {
-			enable = true,
-		},
-	},
-	Lua = {
-		diagnostics = {
-			globals = { "vim" }, -- Gets rid of "Global variable not found" error message
-		},
-	},
-	json = {
-    schemas = schemastore.json.schemas(),
-		-- schemas = {
-		-- 	{
-		-- 		description = "NPM configuration file",
-		-- 		fileMatch = {
-		-- 			"package.json",
-		-- 		},
-		-- 		url = "https://json.schemastore.org/package.json",
-		-- 	},
-		-- },
-	},
+    intelephense = {
+        -- Add wordpress to the list of stubs
+        stubs = {
+            "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date",
+            "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext",
+            "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli",
+            "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql",
+            "Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap",
+            "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy",
+            "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
+            "wordpress", "phpunit",
+        },
+        diagnostics = {
+            enable = true,
+        },
+    },
+    Lua = {
+        diagnostics = {
+            globals = { "vim" }, -- Gets rid of "Global variable not found" error message
+        },
+    },
+    json = {
+        schemas = schemastore.json.schemas(),
+        -- schemas = {
+        -- 	{
+        -- 		description = "NPM configuration file",
+        -- 		fileMatch = {
+        -- 			"package.json",
+        -- 		},
+        -- 		url = "https://json.schemastore.org/package.json",
+        -- 	},
+        -- },
+    },
 }
--- stylua: ignore end
 
--- Add borders to popup you get when you "hover" (<S-k>)
+-- Add borders to the popup you get when you "hover" (K)
 local handlers = {
     ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
     ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),

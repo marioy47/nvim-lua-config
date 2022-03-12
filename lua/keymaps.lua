@@ -80,7 +80,13 @@ map("n", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.l
 map("i", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
 
 -- Nvim-Tree
-map("n", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
-map("i", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
+map("", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
 map("n", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
-map("i", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
+
+-- Diffview
+map("n", "<leader>do", "<cmd>DiffviewOpen<cr>", opts)
+map("n", "<leader>dc", "<cmd>DiffviewClose<cr>", opts)
+
+-- Ripgrep
+
+map("n", "<leader>rg", "<cmd>lua require'nvim-ripgrep'.grep()<cr>", opts)

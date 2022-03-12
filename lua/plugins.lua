@@ -233,7 +233,7 @@ use({ -- Shows you inside your `packaje.json` which packages can be upgraded
         require("package-info").setup()
     end,
 })
-use({
+use({ -- Show the actual color or RGB or CMYK values in your code
     "norcalli/nvim-colorizer.lua",
     config = function()
         require("colorizer").setup()

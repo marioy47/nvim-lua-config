@@ -1,0 +1,15 @@
+{
+  "name": "nvim-lua-config",
+  "version": "1.0.0",
+  "description": "Here is the Work in Progress to configure NeoVim as the perfect IDE for WordPress development",
+  "scripts": {
+    "lint": "stylua --check lua && markdownlint README.md",
+    "format": "stylua lua && markdownlint -f README.md"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "markdownlint-cli": "^0.31.1"
+  }
+}

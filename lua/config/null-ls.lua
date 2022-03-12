@@ -1,4 +1,4 @@
--- lua/config/nulln-ls.lua
+-- lua/config/null-ls.lua
 
 local null_ls = require("null-ls")
 local utils = require("null-ls.utils")
