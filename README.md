@@ -14,6 +14,6 @@ Here is the Work in Progress to configure NeoVim as the perfect IDE for WordPres
 - [x] Format with `:Format` command or using `null-ls` plugin
 - [x] Try to use [lspkind](https://github.com/onsails/lspkind-nvim) without cmp in Telescope and see if it works
 - [x] Add treesitter modules
+- [x] Add telescope extension: frecency
 - [ ] Configure language server [using json](https://github.com/tamago324/nlsp-settings.nvim) instead of lua (allows you to have config per-project)
 - [ ] Verify it works on React
-- [ ] Add telescope extension: frecency

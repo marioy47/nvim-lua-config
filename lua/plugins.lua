@@ -98,7 +98,6 @@ use({ -- CMP completion engine
         require("config.cmp")
     end,
 })
--- [[
 use({ -- Null-LS Use external formatters and linters
     "jose-elias-alvarez/null-ls.nvim",
     requires = {
@@ -132,7 +131,7 @@ use({ -- Telescope: The swiws army knife of searching
         require("config.telescope")
     end,
 })
-use({
+use({ -- Allows you to use `:Rg <search_string>` for fast project search
     "rinx/nvim-ripgrep",
     config = function()
         require("nvim-ripgrep").setup({
@@ -147,7 +146,7 @@ use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tr
         require("config.gitsigns")
     end,
 })
-use({
+use({ -- use :DiffViewToggle to show the git status of your project
     "TimUntersberger/neogit",
     requires = {
         "nvim-lua/plenary.nvim",
@@ -163,7 +162,7 @@ use({ -- Show "blame" information for git tracked files
         require("config.git-blame")
     end,
 })
-use({
+use({ -- Interact with github directly in NeoVim. `:Octo <tab>` for options
     "pwntester/octo.nvim",
     requires = {
         "nvim-lua/plenary.nvim",
@@ -198,7 +197,7 @@ use({ -- Add indentation guides even on blank lines
         require("config.indent-blankline")
     end,
 })
-use({ -- Make the status line beautiful
+use({ -- Make the status line beautiful and more useful
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
@@ -239,6 +238,8 @@ use({ -- Show the actual color or RGB or CMYK values in your code
         require("colorizer").setup()
     end,
 })
+--[[
+  Finish plugin configuration
 --]]
 
 -- Automatically set up your configuration after cloning packer.nvim
