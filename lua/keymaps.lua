@@ -19,7 +19,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Don't jump when using *
-map("n", "*", "*<C-o>", opts)
+map("n", "*", "*<C-o>zz", opts)
 
 -- Keep search matches in the middle of the window
 map("n", "n", "nzzzv", opts)
@@ -70,13 +70,13 @@ map("n", "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
 map("n", "<leader>da", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
 
 -- Telescope
-map("n", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
+map("", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
 map("i", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
-map("n", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
+map("", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
 map("i", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
-map("n", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
+map("", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 map("i", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-map("n", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
+map("", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
 map("i", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
 
 -- Nvim-Tree
@@ -88,5 +88,7 @@ map("n", "<leader>do", "<cmd>DiffviewOpen<cr>", opts)
 map("n", "<leader>dc", "<cmd>DiffviewClose<cr>", opts)
 
 -- Ripgrep
-
 map("n", "<leader>rg", "<cmd>lua require'nvim-ripgrep'.grep()<cr>", opts)
+
+-- Null-ls
+map("n", "<leader>ff", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)

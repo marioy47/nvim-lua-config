@@ -26,24 +26,24 @@ augroup END
 
 -- Remove all trailing whitespace on save
 vim.api.nvim_exec(
-	[[
+    [[
   augroup trim-white-space-on-save
     au!
     autocmd BufWritePre * :%s/\s\+$//e
   augroup END
   ]],
-	false
+    false
 )
 
 -- Prevent new line to also start with a comment
 vim.api.nvim_exec(
-	[[
+    [[
   augroup disable-comments-on-new-lines
     au!
     au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   augroup END
 ]],
-	false
+    false
 )
 
 -- Diagnostics info in the LSP popup. (No need to use `D`)

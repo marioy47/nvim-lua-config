@@ -91,7 +91,8 @@ use({ -- CMP completion engine
     requires = {
         "onsails/lspkind-nvim", -- Icons on the popups
         "hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
-        "saadparwaiz1/cmp_luasnip", -- Snippets source
+        "hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
+        "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-mcp
         "L3MON4D3/LuaSnip", -- Snippet engine
     },
     config = function()

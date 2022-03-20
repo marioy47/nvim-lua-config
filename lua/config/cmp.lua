@@ -1,6 +1,6 @@
 -- lua/config/cmp.lua
 
-local cmp = require("cmp")         -- The complete engine
+local cmp = require("cmp") -- The complete engine
 local luasnip = require("luasnip") -- The snippet engine
 local lspkind = require("lspkind") -- Pretty icons on the automplete list
 
@@ -45,10 +45,11 @@ cmp.setup({
         end,
     },
     -- Where to look for atucomplete items.
-    sources = {
+    sources = cmp.config.sources({
+        { name = "buffer" },
         { name = "nvim_lsp" },
-        { name = "luasnip" },
-    },
+        { name = "luasnip" }, -- For luasnip users.
+    }),
     -- Improve the dropdown list display: Show incons and show where
     -- the automcomplete sugestion comes from
     formatting = {

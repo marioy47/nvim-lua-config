@@ -1,9 +1,10 @@
 -- lua/config/nvim-tree.lua
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_add_trailing = 1
+vim.g.nvim_tree_special_files = { "README.md", "Makefile", "MAKEFILE", "package.json", "composer.json" }
+vim.g.nvim_tree_show_icons = { git = 1, folders = 1, files = 1, folder_arrows = 1 }
 
 require("nvim-tree").setup({
-    auto_close = true,
     diagnostics = {
         enable = true,
     },
@@ -16,7 +17,7 @@ require("nvim-tree").setup({
         mappings = {
             list = {
                 { key = "<C-k>", action = "" },
-                { key = "<C-i>", action = "toggle_file_info" },
+                { key = "i", action = "toggle_file_info" },
             },
         },
     },
