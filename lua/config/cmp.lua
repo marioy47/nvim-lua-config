@@ -1,6 +1,6 @@
 -- lua/config/cmp.lua
 
-local cmp = require("cmp") -- The complete engine
+local cmp = require("cmp") -- The auto-complete engine
 local luasnip = require("luasnip") -- The snippet engine
 local lspkind = require("lspkind") -- Pretty icons on the automplete list
 
@@ -22,7 +22,7 @@ cmp.setup({
         -- Enter select the item
         ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
+            select = false, -- Disable auto select first option which is very anoying when you are writing documentation.
         }),
         -- Use <Tab> as the automplete trigger
         ["<Tab>"] = function(fallback)
@@ -47,6 +47,7 @@ cmp.setup({
     -- Where to look for atucomplete items.
     sources = cmp.config.sources({
         { name = "buffer" },
+        { name = "path" },
         { name = "nvim_lsp" },
         { name = "luasnip" }, -- For luasnip users.
     }),

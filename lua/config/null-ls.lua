@@ -8,15 +8,16 @@ null_ls.setup({
     root_dir = utils.root_pattern("composer.json", "package.json", "Makefile", ".git"), -- Add composer
     diagnostics_format = "#{m} (#{c}) [#{s}]", -- Makes PHPCS errors more readeable
     sources = {
-        -- null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.code_actions.eslint_d,
+        null_ls.builtins.code_actions.eslint_d,-- Install it with `npm i -g eslint_d`
         null_ls.builtins.completion.spell, -- You still need to execute `:set spell`
-        null_ls.builtins.diagnostics.markdownlint, -- Markdown style and syntax checker.
-        null_ls.builtins.diagnostics.phpcs.with({ -- Change how the php linting will work
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.diagnostics.markdownlint, -- Install it with `npm i -g markdownlint-cli`
+        null_ls.builtins.diagnostics.phpcs.with({ -- Use the local installation first
             prefer_local = "vendor/bin",
         }),
-        null_ls.builtins.formatting.markdownlint, -- A Node.js style checker and lint tool for Markdown/CommonMark files.
-        null_ls.builtins.formatting.phpcbf.with({ -- Use the local installation first
+        null_ls.builtins.formatting.eslint_d,
+        null_ls.builtins.formatting.markdownlint,
+        null_ls.builtins.formatting.phpcbf.with({
             prefer_local = "vendor/bin",
         }),
     },
