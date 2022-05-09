@@ -2,7 +2,7 @@
 
 require("nvim-treesitter.configs").setup({
     -- To install additional languages, do: `:TSInstall <mylang>`. `:TSInstall maintained` to install all maintained
-    ensure_installed = "maintained",
+    ensure_installed = "all",
     sync_installed = true,
     highlight = {
         enable = true, -- This is a MUST
