@@ -45,6 +45,10 @@ noremap XX "+x<CR>
 map("t", "<C-s>", "<C-\\><C-n>", opts)
 map("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
 
+--ToggleTerm
+--map("t", "<leader>tt", "<cmd>exe v:count.'ToggleTerm'<CR>", opts)
+
+
 -- Resize windows with Shift+<arrow>
 map("n", "<S-Up>", ":resize +2<CR>", opts)
 map("n", "<S-Down>", ":resize -2<CR>", opts)
@@ -78,6 +82,16 @@ map("", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbol
 map("i", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 map("", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
 map("i", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
+
+--normal_mode jj exit
+map("i", "jj", "<Esc>", opts)
+
+--H first L
+map("n", "H", "^", opts)
+map("v", "H", "^", opts)
+map("n", "L", "$", opts)
+map("v", "L", "$", opts)
+
 
 -- Nvim-Tree
 map("", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
