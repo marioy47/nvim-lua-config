@@ -226,6 +226,9 @@ use({ -- Preview current markdown file with :MarkdownPreview
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
+use({
+     "wakatime/vim-wakatime"
+})
 use({ -- Shows you inside your `packaje.json` which packages can be upgraded
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
