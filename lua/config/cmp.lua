@@ -65,9 +65,9 @@ cmp.setup({
             },
         }),
     },
-    -- Show borders like the LSP autocomplte
-    documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     -- Can be anoying so experiment with it
     experimental = {
