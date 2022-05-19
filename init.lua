@@ -26,11 +26,11 @@ require("commands")
 require("plugins")
 
 -- "Try" to setup the color scheme
-vim.cmd([[silent! colorscheme nightfox]])
+-- vim.cmd([[silent! colorscheme nightfox]])
 
 -- Possible values: storm, night and day
 -- vim.g.tokyonight_style = "night"
--- vim.cmd[[silent! colorscheme tokyonight]]
+vim.cmd[[silent! colorscheme tokyonight]]
 
 -- vim.g.material_style = "deep ocean" -- Possible values: palenight, oceanic, deep ocean, darker, ligher
 -- vim.cmd([[silent! colorscheme material]])

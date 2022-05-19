@@ -53,10 +53,13 @@ use({ -- Have packer manage itself
 use({ -- A collection of material based themes.
     "marko-cerovac/material.nvim",
 })
+use({ -- Monokay, Monokay-pro, Monokay-Soda  and Monokay-Ristretto themes
+    "tanvirtin/monokai.nvim",
+})
 use({ -- Port of VSCode's Tokio Night theme
     "folke/tokyonight.nvim",
 })
-use({ -- Adaptation of the Sublime Text theme for vim.
+use({ -- Adaptation of the Sublime Text theme of the same name.
     "adrian5/oceanic-next-vim",
 })
 use({ -- Another cool dark theme
@@ -145,22 +148,6 @@ use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tr
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
         require("config.gitsigns")
-    end,
-})
-use({ -- use :DiffViewToggle to show the git status of your project
-    "TimUntersberger/neogit",
-    requires = {
-        "nvim-lua/plenary.nvim",
-        "sindrets/diffview.nvim",
-    },
-    config = function()
-        require("config.neogit")
-    end,
-})
-use({ -- Show "blame" information for git tracked files
-    "f-person/git-blame.nvim",
-    config = function()
-        require("config.git-blame")
     end,
 })
 use({ -- Interact with github directly in NeoVim. `:Octo <tab>` for options

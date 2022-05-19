@@ -26,6 +26,10 @@ There is a [pacakge.json](package.json) file with commands for linting and formt
 - `npm run lint` will show any lintin errors on the markdown and lua files
 - `npm run format` will reformat the markdown and lua files
 
+## LSP Support for additional languages
+
+The current setup will try to install some LSP servers for you: `bash`, `intelephenese` (for PHP), `tsserver` (for JavaScript), etc. You can add/remove which languages will get installed by default by changing the `vim.g.lsp_servers` variable in [`init.lua`](init.lua). You can figure out which servers are available by visitint the [Nvim LSP Installer](https://github.com/williamboman/nvim-lsp-installer#available-lsps) page.
+
 ## TODO
 
 - [ ] Configure language server [using json](https://github.com/tamago324/nlsp-settings.nvim) instead of lua (allows you to have config per-project)
