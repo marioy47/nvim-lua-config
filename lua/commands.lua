@@ -46,6 +46,8 @@ vim.api.nvim_exec(
     false
 )
 
+-- Hello
+
 -- Diagnostics info in the LSP popup. (No need to use `D`)
 vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
 
@@ -53,7 +55,7 @@ vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {
 vim.cmd([[command! MaterialToggle execute "lua require('material.functions').toggle_style()"]])
 
 -- :Git opens NeoGit on the sidebar
-vim.cmd([[command! Git execute "lua require('neogit').open({ kind = 'vsplit'})"]])
+vim.cmd([[command! Diffsplit execute "Gitsigns diffthis"]])
 
 -- :Tstatus command to shows Telescope's git_status()
 vim.cmd([[command! Tstatus execute "lua require(\"telescope.builtin\").git_status()"]])
