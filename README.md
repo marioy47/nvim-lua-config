@@ -1,8 +1,8 @@
 # NeoVim configuration for Modern Web/Mobile Development
 
-![Screenshot of NeoVim](screenshot.png)
+Configure NeoVim for Web, and specially WordPress, development.
 
-Configuring NeoVim for multiple language web development is not an easy task. You have not only to find the right plugin for the job, but you have to set them up in the correct way.
+![Screenshot of NeoVim](screenshot.png)
 
 This is a permanent _Work In Progress_.
 
@@ -19,12 +19,22 @@ If you are interested in the rest of my setup, you can visit my [dotfiles repo](
 - (Optional) [eslint_d](https://github.com/mantoni/eslint_d.js) for faster JavaScript linting and diagnostics
 - (Optional) [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) for markdown formatting and linting
 
+If you are on a Mac:
+
+```bash
+brew install stylua composer node
+export PATH=~/.composer/vendor/bin:$PATH # You should make this permanent somehow
+composer global require squizlabs/php_codesniffer
+npm install -g markdownlint-cli eslint_d
+```
+
 ## NPM commands
 
-There is a [pacakge.json](package.json) file with commands for linting and formtting the code:
+There is a [pacakge.json](package.json) file with commands for linting and formtting the code. It's not actually required.
 
-- `npm run lint` will show any lintin errors on the markdown and lua files
+- `npm run lint` will show any linting errors on the markdown and lua files
 - `npm run format` will reformat the markdown and lua files
+- `npm run setup` will open up NeoVim and install all the plugins
 
 ## LSP Support for additional languages
 

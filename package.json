@@ -4,7 +4,8 @@
   "description": "Here is the Work in Progress to configure NeoVim as the perfect IDE for WordPress development",
   "scripts": {
     "lint": "stylua --check lua && markdownlint README.md",
-    "format": "stylua lua && markdownlint -f README.md"
+    "format": "stylua lua && markdownlint -f README.md",
+    "setup": "nvim +PackerSync"
   },
   "keywords": [],
   "author": "",
