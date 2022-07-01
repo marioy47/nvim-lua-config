@@ -5,12 +5,14 @@
   "scripts": {
     "lint": "stylua --check lua && markdownlint README.md",
     "format": "stylua lua && markdownlint -f README.md",
-    "setup": "nvim +PackerSync"
+    "setup": "nvim +PackerSync",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "markdownlint-cli": "^0.31.1"
+    "markdownlint-cli": "^0.31.1",
+    "husky": "^8.0.0"
   }
 }
