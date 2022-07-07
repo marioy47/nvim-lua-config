@@ -76,8 +76,8 @@ map("", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", o
 map("i", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
 map("", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 map("i", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-map("", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
-map("i", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<cr>", opts)
+map("", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", opts)
+map("i", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", opts)
 
 -- Nvim-Tree
 map("", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)

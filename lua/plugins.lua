@@ -128,7 +128,7 @@ use({ -- Telescope: The swiws army knife of searching
         },
         "nvim-telescope/telescope-ui-select.nvim",
         "nvim-telescope/telescope-node-modules.nvim",
-        "nvim-telescope/telescope-live-grep-raw.nvim",
+        "nvim-telescope/telescope-live-grep-args.nvim",
         "nvim-telescope/telescope-symbols.nvim",
     },
     config = function()
