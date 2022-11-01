@@ -12,7 +12,7 @@ If you are interested in the rest of my setup, you can visit my [dotfiles repo](
 
 ## Requirements
 
-- NeoVim at least version 0.5
+- NeoVim at least version 0.8
 - Git
 - (Optional) [Stylua](https://github.com/johnnymorganz/stylua) for linting of `.lua` files
 - (Optional) [PHPCS and PHPCBF](https://github.com/squizlabs/PHP_CodeSniffer) for PHP linting and formatting

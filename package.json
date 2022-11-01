@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "description": "Here is the Work in Progress to configure NeoVim as the perfect IDE for WordPress development",
   "scripts": {
-    "lint": "stylua --check lua && markdownlint README.md",
-    "format": "stylua lua && markdownlint -f README.md",
-    "setup": "nvim +PackerSync",
+    "lint:lua": "stylua --check init.lua lua/*",
+    "lint:md": "markdownlint README.md",
+    "lint": "npm-run-all -p lint:*",
+    "format:lua": "stylua init.lua lua",
+    "format:md": "markdownlint -f README.md",
+    "format": "npm-run-all -p format:*",
+    "setup": "nvim --headless +PackerSync",
     "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^8.0.0",
     "markdownlint-cli": "^0.31.1",
-    "husky": "^8.0.0"
+    "npm-run-all": "^4.1.5"
   }
 }
