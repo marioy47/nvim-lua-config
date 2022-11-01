@@ -21,7 +21,7 @@ require("options")
 require("commands")
 
 -- All keymaps in one file for easier research
--- require("keymaps")
+require("keymaps")
 
 -- Plugins and plugin configuration
 -- require("plugins")

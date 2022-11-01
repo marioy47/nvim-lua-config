@@ -9,7 +9,7 @@
 --   command_mode      = "c",
 
 -- Some shortcuts to make the conf file more clean
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local expr = { noremap = true, silent = true, expr = true }
 
@@ -18,15 +18,12 @@ map("n", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Don't jump when using *
-map("n", "*", "*<C-o>zz", opts)
+-- Jump back and scroll to top when using *
+map("n", "*", "*<C-o>zt<C-y><C-y>", opts)
 
 -- Keep search matches in the middle of the window
 map("n", "n", "nzzzv", opts)
 map("n", "N", "Nzzzv", opts)
-
--- Toggle NetRW (Lexplore)
-map("n", "<Leader>le", ":Lexplore<Cr>", opts)
 
 -- Clear matches with Ctrl+l
 map("n", "<C-l>", ":noh<Cr>", opts)
@@ -41,8 +38,7 @@ noremap YY "+y<CR>
 noremap XX "+x<CR>
 ]])
 
--- Doble ESC or <C-s> to go to normal mode in terminal
-map("t", "<C-s>", "<C-\\><C-n>", opts)
+-- Doble ESC to go to normal mode in terminal
 map("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
 
 -- Resize windows with Shift+<arrow>
@@ -65,30 +61,12 @@ map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 -- map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 
--- Trouble
-map("n", "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
-map("n", "<leader>da", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
-
 -- Telescope
-map("", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
-map("i", "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
-map("", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
-map("i", "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
-map("", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-map("i", "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-map("", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", opts)
-map("i", "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", opts)
+map({ "", "i" }, "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
+map({ "", "i" }, "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
+map({ "", "i" }, "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
+map({ "", "i" }, "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", opts)
 
 -- Nvim-Tree
 map("", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
 map("n", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
-
--- Diffview
-map("n", "<leader>do", "<cmd>DiffviewOpen<cr>", opts)
-map("n", "<leader>dc", "<cmd>DiffviewClose<cr>", opts)
-
--- Ripgrep
-map("n", "<leader>rg", "<cmd>lua require'nvim-ripgrep'.grep()<cr>", opts)
-
--- Null-ls
-map("n", "<leader>ff", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
