@@ -24,7 +24,7 @@ require("commands")
 require("keymaps")
 
 -- Plugins and plugin configuration
--- require("plugins")
+require("plugins")
 
 -- Execute `:echo getcompletion('', 'color')` for a list of color schemes
 vim.cmd([[silent! colorscheme tokyonight]])

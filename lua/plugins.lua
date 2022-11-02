@@ -50,17 +50,8 @@ local use = packer.use
 use({ -- Have packer manage itself
     "wbthomason/packer.nvim",
 })
-use({ -- A collection of material based themes.
-    "marko-cerovac/material.nvim",
-})
-use({ -- Monokay, Monokay-pro, Monokay-Soda  and Monokay-Ristretto themes
-    "tanvirtin/monokai.nvim",
-})
 use({ -- Port of VSCode's Tokio Night theme
     "folke/tokyonight.nvim",
-})
-use({ -- Adaptation of the Sublime Text theme of the same name.
-    "adrian5/oceanic-next-vim",
 })
 use({ -- Another cool dark theme
     "EdenEast/nightfox.nvim",
@@ -68,16 +59,16 @@ use({ -- Another cool dark theme
         require("config.nightfox")
     end,
 })
-use({ -- GitHub inspired theme. Supports light and dark
-    "projekt0n/github-nvim-theme",
-})
 use({ -- Install and configure treesitter languages
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+    run = function()
+        require('nvim-treesitter.install').update({ with_sync = true })
+    end,
     config = function()
         require("config.treesitter")
     end,
 })
+--[[
 use({ -- Configure LSP client and Use an LSP server installer.
     "neovim/nvim-lspconfig",
     requires = {
