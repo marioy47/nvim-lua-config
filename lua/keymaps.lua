@@ -34,7 +34,6 @@ map("v", ">", ">gv", opts)
 -- Switch buffers
 map("n", "<space>bn", "<cmd>bnext<cr>", opts)
 map("n", "<space>bp", "<cmd>bprevious<cr>", opts)
-map("n", "<space>bb", "<cmd>buffers<cr>", opts)
 
 --s YY/XX Copy/Cut into the system clipboard
 vim.cmd([[
@@ -61,13 +60,11 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", expr)
 
 -- Telescope
 map({ "", "i" }, "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
-map({ "", "i" }, "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
 map({ "", "i" }, "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-
 map("n", "<space>ff", require("telescope.builtin").find_files, {})
 map("n", "<space>fg", require("telescope.builtin").live_grep, {})
 map("n", "<space>fb", require("telescope.builtin").buffers, {})
-map("n", "<space>fd", require("telescope.builtin").diagnostics, {})
+map("n", "<space>e", require("telescope.builtin").diagnostics, {})
 map("n", "<space>fs", require("telescope.builtin").lsp_document_symbols, {})
 map("n", "<space>gs", require("telescope.builtin").git_status, {})
 map("n", "<space>gb", require("telescope.builtin").git_branches, {})

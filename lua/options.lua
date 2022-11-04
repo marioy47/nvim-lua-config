@@ -1,5 +1,6 @@
 -- lua/options.lua
 
+vim.g.mapleader = " " -- Set <leader> to space
 vim.opt.number = true -- Show numbers on the left
 vim.opt.relativenumber = true -- Its better if you use motions like 10j or 5yk
 vim.opt.hlsearch = true -- Highlight search results
@@ -30,5 +31,5 @@ vim.opt.inccommand = "split" -- Shows the effects of a command incrementally AND
 vim.g.netrw_liststyle = 3 -- Use nested tree style NetRW
 vim.g.netrw_winsize = 25 -- Lexplore takes 25% of the screen
 vim.o.ch = 0 -- Requires Nvim 0.8: Hide command line at end unless a commend is being executed
-vim.o.ls = 0 -- Requires Nvim 0.8: Hide Last Status on statusbar
+--vim.o.ls = 0 -- Requires Nvim 0.8: Hide Last Status on statusbar
 vim.opt.formatoptions:append({ "r" }) -- Add asterisks in block comments (Not 100% sure)

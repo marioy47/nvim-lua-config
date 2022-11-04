@@ -67,6 +67,15 @@ use({ -- Install and configure treesitter languages
         require("config.treesitter")
     end,
 })
+use({ -- Install language servers using `:MasonInstall <server>`
+    "williamboman/mason.nvim",
+    requires = {
+        "williamboman/mason-lspconfig.nvim",
+    },
+    config = function()
+        require("config.mason")
+    end,
+})
 use({ -- Configure LSP client
     "neovim/nvim-lspconfig",
     requires = {
@@ -76,13 +85,10 @@ use({ -- Configure LSP client
         require("config.lspconfig")
     end,
 })
-use({ -- Install language servers using `:MasonInstall <server>`
-    "williamboman/mason.nvim",
-    requires = {
-        "williamboman/mason-lspconfig.nvim",
-    },
+use({ -- Null-LS Use external formatters and linters
+    "jose-elias-alvarez/null-ls.nvim",
     config = function()
-        require("config.mason")
+        require("config.null-ls")
     end,
 })
 use({ -- Autocomplete engine with plugins for LSP, Snippets, Paths, Commands, etc.
@@ -107,66 +113,6 @@ use({ -- Fizzy finder to find files, grep content, list buffers, etc.
         "nvim-lua/plenary.nvim",
     },
 })
-use({ -- Null-LS Use external formatters and linters
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-        require("config.null-ls")
-    end,
-})
---[[
-use({ -- Trouble: pretty diagnostics
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-        require("trouble").setup({})
-    end,
-})
-use({ -- Telescope: The swiws army knife of searching
-    "nvim-telescope/telescope.nvim",
-    requires = {
-        "nvim-lua/plenary.nvim",
-        {
-            "nvim-telescope/telescope-frecency.nvim", -- Better sorting algorithm
-            "tami5/sqlite.lua",
-        },
-        "nvim-telescope/telescope-ui-select.nvim",
-        "nvim-telescope/telescope-node-modules.nvim",
-        "nvim-telescope/telescope-live-grep-args.nvim",
-        "nvim-telescope/telescope-symbols.nvim",
-    },
-    config = function()
-        require("config.telescope")
-    end,
-})
-use({ -- Allows you to use `:Rg <search_string>` for fast project search
-    "rinx/nvim-ripgrep",
-    config = function()
-        require("nvim-ripgrep").setup({
-            open_qf_fn = require("nvim-ripgrep.extensions").trouble_open_qf,
-        })
-    end,
-})
-use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
-    "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = function()
-        require("config.gitsigns")
-    end,
-})
-use({ -- Interact with github directly in NeoVim. `:Octo <tab>` for options
-    "pwntester/octo.nvim",
-    requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
-        "kyazdani42/nvim-web-devicons",
-    },
-    config = function()
-        require("octo").setup()
-    end,
-})
-use({ -- Support for .editorconfig files
-    "gpanders/editorconfig.nvim",
-})
 use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
     "kyazdani42/nvim-tree.lua",
     requires = {
@@ -176,16 +122,26 @@ use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
         require("config.nvim-tree")
     end,
 })
-use({ -- Floating terminal with C-k C-t
-    "akinsho/toggleterm.nvim",
+use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
+    "lewis6991/gitsigns.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
     config = function()
-        require("config.toggleterm")
+        require("config.gitsigns")
     end,
+})
+use({ -- Support for .editorconfig files
+    "gpanders/editorconfig.nvim",
 })
 use({ -- Add indentation guides even on blank lines
     "lukas-reineke/indent-blankline.nvim",
     config = function()
         require("config.indent-blankline")
+    end,
+})
+use({ -- Whichkey: popup help for keymaps
+    "folke/which-key.nvim",
+    config = function()
+        require("config.which-key")
     end,
 })
 use({ -- Make the status line beautiful and more useful
@@ -195,10 +151,31 @@ use({ -- Make the status line beautiful and more useful
         require("config.lualine")
     end,
 })
-use({ -- Whichkey: popup help for keymaps
-    "folke/which-key.nvim",
+use({ -- Preview current markdown file with :MarkdownPreview
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = { "markdown" },
+    cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
+})
+--[[
+use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
     config = function()
-        require("config.which-key")
+        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+        vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+        vim.keymap.set("n", "gR", "<cmd>Lspsaga rename<CR>", { silent = true })
+        vim.keymap.set("n", "gR", "<cmd>Lspsaga rename<CR>", { silent = true })
+        vim.keymap.set("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+        vim.diagnostic.config({
+            virtual_text = false
+        })
+    end,
+})
+use({ -- Floating terminal with C-k C-t
+    "akinsho/toggleterm.nvim",
+    config = function()
+        require("config.toggleterm")
     end,
 })
 use({ -- Fast commenting! Enable gcc and gcb for comments
@@ -209,12 +186,6 @@ use({ -- Fast commenting! Enable gcc and gcb for comments
 })
 use({ -- Align items with `:SimpleAlign --` for instance
     "kg8m/vim-simple-align",
-})
-use({ -- Preview current markdown file with :MarkdownPreview
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    ft = { "markdown" },
-    cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
 use({ -- Shows you inside your `packaje.json` which packages can be upgraded
     "vuki656/package-info.nvim",

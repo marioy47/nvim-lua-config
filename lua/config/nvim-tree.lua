@@ -1,8 +1,4 @@
 -- lua/config/nvim-tree.lua
--- vim.g.nvim_tree_indent_markers = 1
--- vim.g.nvim_tree_add_trailing = 1
--- vim.g.nvim_tree_special_files = { "README.md", "Makefile", "MAKEFILE", "package.json", "composer.json" }
--- vim.g.nvim_tree_show_icons = { git = 1, folders = 1, files = 1, folder_arrows = 1 }
 
 require("nvim-tree").setup({
     view = {
@@ -24,6 +20,7 @@ require("nvim-tree").setup({
             git_placement = "after",
         },
         special_files = { "README.md", "Makefile", "MAKEFILE", "package.json", "composer.json" },
+        highlight_git = false,
     },
     diagnostics = {
         enable = true,

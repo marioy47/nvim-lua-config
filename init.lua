@@ -1,18 +1,8 @@
 -- init.lua
 
--- LSP servers to install by default (you can add more with :LspInstallInfo)
-vim.g.lsp_servers = {
-    "bashls",
-    "emmet_ls",
-    --"grammarly",
-    "jsonls",
-    "sumneko_lua",
-    "tsserver",
-    "yamlls",
-    "cssls",
-    "html",
-    "intelephense",
-}
+-- Required to be here by the plugin nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Vim native options. Make it more modern
 require("options")

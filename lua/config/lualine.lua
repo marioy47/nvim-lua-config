@@ -17,7 +17,10 @@ require("lualine").setup({
             },
         },
         lualine_x = {
-            { "diagnostics", sources = { "nvim_diagnostic" } },
+            {
+                "diagnostics",
+                sources = { "nvim_diagnostic" },
+            },
             "encoding",
             "fileformat",
             "filetype",
