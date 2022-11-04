@@ -32,17 +32,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Diagnostics info in the LSP popup. (No need to use `D`)
---vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
-
--- :Tstatus command to shows Telescope's git_status()
---vim.cmd([[command! Tstatus execute "lua require(\"telescope.builtin\").git_status()"]])
---vim.cmd([[command! Tgrep execute "lua require(\"telescope.builtin\").live_grep()"]])
---vim.cmd([[command! Ttags execute "lua require(\"telescope.builtin\").help_tags()"]])
+vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
 
 -- :Format command to format code using LSP
---vim.cmd("command! Format execute 'lua vim.lsp.buf.format({async = true})'")
+vim.cmd("command! Format execute 'lua vim.lsp.buf.format({async = true})'")
 
 -- :Actions command to execute LSP's code_action() function
---vim.cmd("command! Actions execute 'lua vim.lsp.buf.code_action()'")
-
-vim.api.nvim_create_user_command("HolaMundo", "lua print(1234)", {})
+vim.cmd("command! Actions execute 'lua vim.lsp.buf.code_action()'")

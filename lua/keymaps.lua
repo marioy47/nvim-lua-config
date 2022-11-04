@@ -64,13 +64,13 @@ map({ "", "i" }, "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_fil
 map({ "", "i" }, "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
 map({ "", "i" }, "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 
-map("n", "<space>ff", require('telescope.builtin').find_files, {})
-map("n", "<space>fg", require('telescope.builtin').live_grep, {})
-map("n", "<space>fb", require('telescope.builtin').buffers, {})
-map("n", "<space>fh", require('telescope.builtin').help_tags, {})
-map("n", "<space>fs", require('telescope.builtin').lsp_document_symbols, {})
-map("n", "<space>gs", require('telescope.builtin').git_status, {})
-map("n", "<space>gb", require('telescope.builtin').git_branches, {})
+map("n", "<space>ff", require("telescope.builtin").find_files, {})
+map("n", "<space>fg", require("telescope.builtin").live_grep, {})
+map("n", "<space>fb", require("telescope.builtin").buffers, {})
+map("n", "<space>fd", require("telescope.builtin").diagnostics, {})
+map("n", "<space>fs", require("telescope.builtin").lsp_document_symbols, {})
+map("n", "<space>gs", require("telescope.builtin").git_status, {})
+map("n", "<space>gb", require("telescope.builtin").git_branches, {})
 
 -- Nvim-Tree
 map({ "", "n" }, "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)

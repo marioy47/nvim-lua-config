@@ -76,13 +76,16 @@ use({ -- Configure LSP client
         require("config.lspconfig")
     end,
 })
-use({
+use({ -- Install language servers using `:MasonInstall <server>`
     "williamboman/mason.nvim",
+    requires = {
+        "williamboman/mason-lspconfig.nvim",
+    },
     config = function()
-        require("mason").setup()
-    end
+        require("config.mason")
+    end,
 })
-use({
+use({ -- Autocomplete engine with plugins for LSP, Snippets, Paths, Commands, etc.
     "hrsh7th/nvim-cmp",
     requires = {
         "hrsh7th/cmp-nvim-lsp",
@@ -97,24 +100,20 @@ use({
         require("config.cmp")
     end,
 })
-use({
+use({ -- Fizzy finder to find files, grep content, list buffers, etc.
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
     requires = {
         "nvim-lua/plenary.nvim",
     },
 })
-
---[[
 use({ -- Null-LS Use external formatters and linters
     "jose-elias-alvarez/null-ls.nvim",
-    requires = {
-        "nvim-lua/plenary.nvim",
-    },
     config = function()
         require("config.null-ls")
     end,
 })
+--[[
 use({ -- Trouble: pretty diagnostics
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
