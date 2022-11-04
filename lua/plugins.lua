@@ -16,7 +16,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     print("Installing packer close and reopen Neovim...")
     vim.cmd([[packadd packer.nvim]])
 end
-
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
   augroup packer_user_config
@@ -62,37 +61,51 @@ use({ -- Another cool dark theme
 use({ -- Install and configure treesitter languages
     "nvim-treesitter/nvim-treesitter",
     run = function()
-        require('nvim-treesitter.install').update({ with_sync = true })
+        require("nvim-treesitter.install").update({ with_sync = true })
     end,
     config = function()
         require("config.treesitter")
     end,
 })
---[[
-use({ -- Configure LSP client and Use an LSP server installer.
+use({ -- Configure LSP client
     "neovim/nvim-lspconfig",
     requires = {
-        "williamboman/nvim-lsp-installer", -- Installs servers within neovim
-        "onsails/lspkind-nvim", -- adds vscode-like pictograms to neovim built-in lsp
-        "b0o/schemastore.nvim", -- Auto validation some json files like package.json or .esltitrc.json
+        "b0o/SchemaStore.nvim",
     },
     config = function()
-        require("config.lsp")
+        require("config.lspconfig")
     end,
 })
-use({ -- CMP completion engine
+use({
+    "williamboman/mason.nvim",
+    config = function()
+        require("mason").setup()
+    end
+})
+use({
     "hrsh7th/nvim-cmp",
     requires = {
-        "onsails/lspkind-nvim", -- Icons on the popups
-        "hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
-        "hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
-        "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-mcp
-        "L3MON4D3/LuaSnip", -- Snippet engine
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-git",
+        "L3MON4D3/LuaSnip",
     },
     config = function()
         require("config.cmp")
     end,
 })
+use({
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.0",
+    requires = {
+        "nvim-lua/plenary.nvim",
+    },
+})
+
+--[[
 use({ -- Null-LS Use external formatters and linters
     "jose-elias-alvarez/null-ls.nvim",
     requires = {

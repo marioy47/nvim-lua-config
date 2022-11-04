@@ -4,7 +4,6 @@ require("nvim-treesitter.configs").setup({
     auto_install = true,
     highlight = {
         enable = true, -- This is a MUST
-        additional_vim_regex_highlighting = false, -- {"php"}
     },
     incremental_selection = {
         enable = true, -- Enable selection of CODE blocks
@@ -19,6 +18,9 @@ require("nvim-treesitter.configs").setup({
         enable = true,
         extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
         max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    },
+    autotag = {
+        enable = true,
     },
 })
 

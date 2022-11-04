@@ -1,76 +1,56 @@
--- lua/config/cmp.lua
+local cmp = require("cmp")
 
-local cmp = require("cmp") -- The auto-complete engine
-local luasnip = require("luasnip") -- The snippet engine
-local lspkind = require("lspkind") -- Pretty icons on the automplete list
-
--- This is almost verbatin from the Github Page
 cmp.setup({
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(args.body)
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
-    },
-    mapping = {
-        -- Navigate the dropdown list snippet
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
-        -- Enter select the item
-        ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false, -- Disable auto select first option which is very anoying when you are writing documentation.
-        }),
-        -- Use <Tab> as the automplete trigger
-        ["<Tab>"] = function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end,
-        ["<S-Tab>"] = function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end,
-    },
-    -- Where to look for atucomplete items.
-    sources = cmp.config.sources({
-        { name = "buffer" },
-        { name = "path" },
-        { name = "nvim_lsp" },
-        { name = "luasnip" }, -- For luasnip users.
-    }),
-    -- Improve the dropdown list display: Show incons and show where
-    -- the automcomplete sugestion comes from
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = "symbol_text",
-            menu = {
-                buffer = "[Buf]",
-                nvim_lsp = "[Lsp]",
-                luasnip = "[Snip]",
-                nvim_lua = "[Lua]",
-                latex_symbols = "[Lat]",
-            },
-        }),
     },
     window = {
         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
     },
-    -- Can be anoying so experiment with it
-    experimental = {
-        ghost_text = true,
+    mapping = cmp.mapping.preset.insert({
+        ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-j>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "nvim_lua" },
+        { name = "luasnip" }, -- For luasnip users.
+        { name = "cmdline" },
+    }, {
+        { name = "path" },
+        { name = "buffer" },
+    }),
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype("gitcommit", {
+    sources = cmp.config.sources({
+        { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+        { name = "buffer" },
+    }),
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ "/", "?" }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = "buffer" },
     },
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = "path" },
+    }, {
+        { name = "cmdline" },
+    }),
 })

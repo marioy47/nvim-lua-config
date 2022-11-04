@@ -13,17 +13,16 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local expr = { noremap = true, silent = true, expr = true }
 
--- Map leader key to space
-map("n", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Jump back and scroll to top when using *
-map("n", "*", "*<C-o>zt<C-y><C-y>", opts)
+--map("n", "*", "*zt<C-y><C-y>", opts)
 
--- Keep search matches in the middle of the window
-map("n", "n", "nzzzv", opts)
-map("n", "N", "Nzzzv", opts)
+-- Add Up/Down scrolling (<C-e> and <C-y>) to insert mode
+map("i", "<C-y>", "<Esc><C-y>a", opts)
+map("i", "<C-e>", "<Esc><C-e>a", opts)
+
+-- Show search matches at the top and unfold
+map("n", "n", "nztzv", opts)
+map("n", "N", "Nzv", opts)
 
 -- Clear matches with Ctrl+l
 map("n", "<C-l>", ":noh<Cr>", opts)
@@ -32,7 +31,12 @@ map("n", "<C-l>", ":noh<Cr>", opts)
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
--- YY/XX Copy/Cut into the system clipboard
+-- Switch buffers
+map("n", "<space>bn", "<cmd>bnext<cr>", opts)
+map("n", "<space>bp", "<cmd>bprevious<cr>", opts)
+map("n", "<space>bb", "<cmd>buffers<cr>", opts)
+
+--s YY/XX Copy/Cut into the system clipboard
 vim.cmd([[
 noremap YY "+y<CR>
 noremap XX "+x<CR>
@@ -55,18 +59,18 @@ map("x", "K", ":move '<-2<CR>gv-gv", opts)
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", expr)
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", expr)
 
--- Diagnostics
--- map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
--- map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-
 -- Telescope
 map({ "", "i" }, "<C-k><C-p>", "<cmd>lua require(\"telescope.builtin\").find_files()<cr>", opts)
 map({ "", "i" }, "<C-k><C-l>", "<cmd>lua require(\"telescope.builtin\").buffers()<cr>", opts)
 map({ "", "i" }, "<C-k><C-o>", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-map({ "", "i" }, "<C-k><C-g>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", opts)
+
+map("n", "<space>ff", require('telescope.builtin').find_files, {})
+map("n", "<space>fg", require('telescope.builtin').live_grep, {})
+map("n", "<space>fb", require('telescope.builtin').buffers, {})
+map("n", "<space>fh", require('telescope.builtin').help_tags, {})
+map("n", "<space>fs", require('telescope.builtin').lsp_document_symbols, {})
+map("n", "<space>gs", require('telescope.builtin').git_status, {})
+map("n", "<space>gb", require('telescope.builtin').git_branches, {})
 
 -- Nvim-Tree
-map("", "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
-map("n", "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
+map({ "", "n" }, "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
