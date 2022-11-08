@@ -77,6 +77,15 @@ use({ -- Fast commenting! Enable gcc and gcb for comments
         require("Comment").setup()
     end,
 })
+use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+        "kyazdani42/nvim-web-devicons", -- optional, for file icon
+    },
+    config = function()
+        require("config.nvim-tree")
+    end,
+})
 use({ -- Install and configure treesitter languages
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -104,13 +113,16 @@ use({ -- Configure LSP client
         require("config.lspconfig")
     end,
 })
---[[
 use({ -- Null-LS Use external formatters and linters
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
         require("config.null-ls")
     end,
+    requires = {
+        "nvim-lua/plenary.nvim",
+    },
 })
+--[[
 use({ -- Autocomplete engine with plugins for LSP, Snippets, Paths, Commands, etc.
     "hrsh7th/nvim-cmp",
     requires = {
@@ -132,15 +144,6 @@ use({ -- Fizzy finder to find files, grep content, list buffers, etc.
     requires = {
         "nvim-lua/plenary.nvim",
     },
-})
-use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
-    "kyazdani42/nvim-tree.lua",
-    requires = {
-        "kyazdani42/nvim-web-devicons", -- optional, for file icon
-    },
-    config = function()
-        require("config.nvim-tree")
-    end,
 })
 use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
     "lewis6991/gitsigns.nvim",

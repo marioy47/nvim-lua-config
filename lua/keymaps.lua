@@ -73,7 +73,4 @@ vim.keymap.set("n", "<Leader>fs", require("telescope.builtin").lsp_document_symb
 vim.keymap.set("n", "<Leader>gs", require("telescope.builtin").git_status, {})
 vim.keymap.set("n", "<Leader>gb", require("telescope.builtin").git_branches, {})
 
--- Nvim-Tree
-vim.keymap.set({ "", "n" }, "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
 --]]
---

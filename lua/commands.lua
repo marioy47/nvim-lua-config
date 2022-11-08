@@ -16,12 +16,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     desc = "When re-open a file, place the cursor at the last position",
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
-    command = [[if argc() == 0 | Explore! | endif]],
-    desc = "If NeoVim is opened without parammeter, start NetRw on curren dir",
-})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     command = [[:%s/\s\+$//e]],

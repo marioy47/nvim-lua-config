@@ -1,13 +1,15 @@
 -- lua/config/nvim-tree.lua
 
 require("nvim-tree").setup({
+    open_on_setup = true,
     view = {
+        adaptive_size = true,
         width = 45,
         side = "right",
         mappings = {
             list = {
-                { key = "<C-k>", action = "" },
-                { key = "i", action = "toggle_file_info" },
+                { key = "<C-k>", action = "" }, -- Conflicts with other plugins
+                { key = "i", action = "toggle_file_info" }, -- Friendlier with Spanish
             },
         },
     },
@@ -20,11 +22,11 @@ require("nvim-tree").setup({
             git_placement = "after",
         },
         special_files = { "README.md", "Makefile", "MAKEFILE", "package.json", "composer.json" },
-        highlight_git = false,
+        highlight_opened_files = "all",
     },
     diagnostics = {
         enable = true,
-        show_on_dirs = false,
+        show_on_dirs = true,
     },
     git = {
         ignore = false,
@@ -33,6 +35,15 @@ require("nvim-tree").setup({
         open_file = {
             quit_on_open = true,
             resize_window = true,
+            window_picker = {
+                enable = false,
+            },
         },
     },
 })
+
+-- Keymaps for faster access
+local opts = { noremap = true, silent = true }
+vim.keymap.set({ "", "n" }, "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
+vim.keymap.set({ "", "n" }, "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
+--

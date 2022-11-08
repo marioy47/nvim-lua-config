@@ -19,6 +19,6 @@ null_ls.setup({
         null_ls.builtins.formatting.phpcbf.with({
             prefer_local = "vendor/bin",
         }),
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettierd,
     },
 })
