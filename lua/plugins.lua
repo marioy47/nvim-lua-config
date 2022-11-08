@@ -77,7 +77,6 @@ use({ -- Fast commenting! Enable gcc and gcb for comments
         require("Comment").setup()
     end,
 })
---[[
 use({ -- Install and configure treesitter languages
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -105,6 +104,7 @@ use({ -- Configure LSP client
         require("config.lspconfig")
     end,
 })
+--[[
 use({ -- Null-LS Use external formatters and linters
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
