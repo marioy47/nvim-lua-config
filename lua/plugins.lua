@@ -58,6 +58,26 @@ use({ -- Another cool dark theme
         require("config.nightfox")
     end,
 })
+use({ -- Whichkey: popup help for keymaps
+    "folke/which-key.nvim",
+    config = function()
+        require("config.which-key")
+    end,
+})
+use({ -- Make the status line beautiful and more useful
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    config = function()
+        require("config.lualine")
+    end,
+})
+use({ -- Fast commenting! Enable gcc and gcb for comments
+    "numToStr/Comment.nvim",
+    config = function()
+        require("Comment").setup()
+    end,
+})
+--[[
 use({ -- Install and configure treesitter languages
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -138,26 +158,12 @@ use({ -- Add indentation guides even on blank lines
         require("config.indent-blankline")
     end,
 })
-use({ -- Whichkey: popup help for keymaps
-    "folke/which-key.nvim",
-    config = function()
-        require("config.which-key")
-    end,
-})
-use({ -- Make the status line beautiful and more useful
-    "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
-    config = function()
-        require("config.lualine")
-    end,
-})
 use({ -- Preview current markdown file with :MarkdownPreview
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
---[[
 use({
     "glepnir/lspsaga.nvim",
     branch = "main",
@@ -176,12 +182,6 @@ use({ -- Floating terminal with C-k C-t
     "akinsho/toggleterm.nvim",
     config = function()
         require("config.toggleterm")
-    end,
-})
-use({ -- Fast commenting! Enable gcc and gcb for comments
-    "numToStr/Comment.nvim",
-    config = function()
-        require("Comment").setup()
     end,
 })
 use({ -- Align items with `:SimpleAlign --` for instance

@@ -1,12 +1,9 @@
 -- config/lualine.lua
 
 require("lualine").setup({
-    options = {
-        globalstatus = true,
-    },
-    sections = {
+    sections = { -- All sections here: https://github.com/nvim-lualine/lualine.nvim#available-components
         lualine_a = {},
-        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_b = { "branch", "diagnostics" },
         lualine_c = {
             {
                 "filename",
@@ -21,18 +18,18 @@ require("lualine").setup({
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
             },
-            "encoding",
+            "diff",
             "fileformat",
             "filetype",
         },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_y = { "progress", "location" },
+        lualine_z = { "searchcount" },
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = { "location" },
+        lualine_c = {},
+        lualine_x = {},
         lualine_y = {},
         lualine_z = {},
     },

@@ -2,9 +2,6 @@
 
 vim.cmd("autocmd!")
 
---[[
--- Command that get executed automatically
--- ]]
 vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
     callback = function()
@@ -31,11 +28,20 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Remove all trailing whitespace on save",
 })
 
--- Diagnostics info in the LSP popup. (No need to use `D`)
-vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    pattern = "*",
+    command = [[lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]],
+    desc = "Diagnostics info in the LSP popup. (No need to use `D`)",
+})
 
--- :Format command to format code using LSP
-vim.cmd("command! Format execute 'lua vim.lsp.buf.format({async = true})'")
+vim.api.nvim_create_user_command("Format", "lua vim.lsp.buf.format({async = true})", {
+    desc = "Use :Format to format the code using any supported Language Server",
+})
 
--- :Actions command to execute LSP's code_action() function
-vim.cmd("command! Actions execute 'lua vim.lsp.buf.code_action()'")
+vim.api.nvim_create_user_command("Actions", "lua vim.lsp.buf.code_action()", {
+    desc = "Use :Actions command to execute LSP's code_action() function",
+})
+
+vim.api.nvim_create_user_command("Colors", "print getcompletion('', 'colorscheme')", {
+    desc = "Use :Actions command to execute LSP's code_action() function",
+})

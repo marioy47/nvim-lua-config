@@ -1,8 +1,8 @@
 -- init.lua
 
 -- Required to be here by the plugin nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
 
 -- Vim native options. Make it more modern
 require("options")
@@ -16,5 +16,5 @@ require("keymaps")
 -- Plugins and plugin configuration
 require("plugins")
 
--- Execute `:echo getcompletion('', 'color')` for a list of color schemes
-vim.cmd([[silent! colorscheme tokyonight]])
+-- For a list of Colors, execute  `:echo getcompletion('', 'color')`
+vim.cmd("silent! colorscheme tokyonight")
