@@ -122,6 +122,13 @@ use({ -- Null-LS Use external formatters and linters
         "nvim-lua/plenary.nvim",
     },
 })
+use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+        require("config.lspsaga")
+    end,
+})
 --[[
 use({ -- Autocomplete engine with plugins for LSP, Snippets, Paths, Commands, etc.
     "hrsh7th/nvim-cmp",
@@ -166,20 +173,6 @@ use({ -- Preview current markdown file with :MarkdownPreview
     run = "cd app && npm install",
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
-})
-use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-        vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
-        vim.keymap.set("n", "gR", "<cmd>Lspsaga rename<CR>", { silent = true })
-        vim.keymap.set("n", "gR", "<cmd>Lspsaga rename<CR>", { silent = true })
-        vim.keymap.set("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-        vim.diagnostic.config({
-            virtual_text = false
-        })
-    end,
 })
 use({ -- Floating terminal with C-k C-t
     "akinsho/toggleterm.nvim",
