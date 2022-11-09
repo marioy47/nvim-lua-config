@@ -5,19 +5,11 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
 
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "gp", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "gn", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<Leader>dd", vim.diagnostic.setloclist, opts)
 
 local on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    --vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts) -- lspsaga
-    -- vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, bufopts) -- lspsaga
-    -- vim.keymap.set("n", "<Leader>le", vim.lsp.buf.references, bufopts) -- lspsaga
-    -- vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, bufopts) -- lspsaga
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     vim.keymap.set("n", "<Leader>lf", function()
         vim.lsp.buf.format({ async = true })
     end, bufopts)
