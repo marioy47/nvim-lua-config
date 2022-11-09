@@ -113,6 +113,13 @@ use({ -- Configure LSP client
         require("config.lspconfig")
     end,
 })
+use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+        require("config.lspsaga")
+    end,
+})
 use({ -- Null-LS Use external formatters and linters
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
@@ -122,14 +129,6 @@ use({ -- Null-LS Use external formatters and linters
         "nvim-lua/plenary.nvim",
     },
 })
-use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-        require("config.lspsaga")
-    end,
-})
---[[
 use({ -- Autocomplete engine with plugins for LSP, Snippets, Paths, Commands, etc.
     "hrsh7th/nvim-cmp",
     requires = {
@@ -151,21 +150,29 @@ use({ -- Fizzy finder to find files, grep content, list buffers, etc.
     requires = {
         "nvim-lua/plenary.nvim",
     },
-})
-use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
-    "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
     config = function()
-        require("config.gitsigns")
+        require("config.telescope")
     end,
+})
+use({ -- Add indentation guides even on blank lines
+    "lukas-reineke/indent-blankline.nvim",
+})
+use({ -- Align items with `:SimpleAlign --` for instance
+    "kg8m/vim-simple-align",
 })
 use({ -- Support for .editorconfig files
     "gpanders/editorconfig.nvim",
 })
-use({ -- Add indentation guides even on blank lines
-    "lukas-reineke/indent-blankline.nvim",
+use({ -- Show the actual color or RGB or CMYK values in your code
+    "norcalli/nvim-colorizer.lua",
     config = function()
-        require("config.indent-blankline")
+        require("colorizer").setup()
+    end,
+})
+use({
+    "windwp/nvim-autopairs",
+    config = function()
+        require("nvim-autopairs").setup({})
     end,
 })
 use({ -- Preview current markdown file with :MarkdownPreview
@@ -174,26 +181,25 @@ use({ -- Preview current markdown file with :MarkdownPreview
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
+--[[
+use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
+    "lewis6991/gitsigns.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+        require("config.gitsigns")
+    end,
+})
 use({ -- Floating terminal with C-k C-t
     "akinsho/toggleterm.nvim",
     config = function()
         require("config.toggleterm")
     end,
 })
-use({ -- Align items with `:SimpleAlign --` for instance
-    "kg8m/vim-simple-align",
-})
 use({ -- Shows you inside your `packaje.json` which packages can be upgraded
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
     config = function()
         require("package-info").setup()
-    end,
-})
-use({ -- Show the actual color or RGB or CMYK values in your code
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-        require("colorizer").setup()
     end,
 })
 --[[

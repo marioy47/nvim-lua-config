@@ -44,6 +44,5 @@ require("nvim-tree").setup({
 
 -- Keymaps for faster access
 local opts = { noremap = true, silent = true }
-vim.keymap.set({ "", "n" }, "<C-k><C-k>", "<cmd>NvimTreeToggle<cr>", opts)
-vim.keymap.set({ "", "n" }, "<C-k><C-f>", "<cmd>NvimTreeFindFile<cr>", opts)
---
+vim.keymap.set({ "", "n" }, "<Leader>kk", "<cmd>NvimTreeToggle<cr>", opts)
+vim.keymap.set({ "", "n" }, "<Leader>kf", "<cmd>NvimTreeFindFile<cr>", opts)

@@ -5,6 +5,9 @@ require("nvim-treesitter.configs").setup({
     highlight = {
         enable = true, -- This is a MUST
     },
+    indent = {
+        enable = true,
+    },
     incremental_selection = {
         enable = true, -- Enable selection of CODE blocks
         keymaps = {
