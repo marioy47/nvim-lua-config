@@ -181,20 +181,13 @@ use({ -- Preview current markdown file with :MarkdownPreview
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
---[[
-use({ -- GitSigns: how signs(+, -, ~ ) on the gutter for changed lines on gir tracked files
+use({ -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
     "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
     config = function()
         require("config.gitsigns")
     end,
 })
-use({ -- Floating terminal with C-k C-t
-    "akinsho/toggleterm.nvim",
-    config = function()
-        require("config.toggleterm")
-    end,
-})
+--[[
 use({ -- Shows you inside your `packaje.json` which packages can be upgraded
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
