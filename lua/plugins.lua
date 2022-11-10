@@ -187,12 +187,11 @@ use({ -- Show GIT changes on the gutter and add some git visualiztions with <Lea
         require("config.gitsigns")
     end,
 })
---[[
 use({ -- Shows you inside your `packaje.json` which packages can be upgraded
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
     config = function()
-        require("package-info").setup()
+        require("config.package-info")
     end,
 })
 --[[
