@@ -58,6 +58,12 @@ use({ -- Another cool dark theme
         require("config.nightfox")
     end,
 })
+use({
+    "marko-cerovac/material.nvim",
+    config = function()
+        require("config.material")
+    end,
+})
 use({ -- Fast commenting! Enable gcc and gcb for comments
     "numToStr/Comment.nvim",
     config = function()
@@ -114,7 +120,7 @@ use({ -- Install language servers using `:MasonInstall <server>`
         require("config.mason")
     end,
 })
--- use({ -- Debugger (:MasonInstall php-debug-adapter)
+-- use({ -- Debugger (Install debuggers with :MasonInstall php-debug-adapter)
 --     "mfussenegger/nvim-dap",
 --     config = function() end,
 -- })
@@ -200,7 +206,7 @@ use({ -- Preview current markdown file with :MarkdownPreview
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
 })
-use({ -- Shows you inside your `packaje.json` which packages can be upgraded
+use({ -- Shows you inside your `pacakge.json` which packages can be upgraded (:TogglePackageInfo)
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
     config = function()
