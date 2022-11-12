@@ -2,25 +2,23 @@
 
 require("telescope").setup({
     defaults = {
-        initial_mode = "insert",
-        selection_strategy = "reset",
         sorting_strategy = "ascending",
-        layout_strategy = "horizontal",
+        --     layout_strategy = "horizontal",
         layout_config = {
             horizontal = {
                 prompt_position = "top",
                 preview_width = 0.55,
-                results_width = 0.8,
             },
-            vertical = {
-                mirror = false,
-            },
-            width = 0.87,
-            height = 0.80,
-            preview_cutoff = 120,
+            width = 0.9,
+            height = 0.90,
         },
     },
 })
 
 vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files<cr>", {})
-vim.keymap.set("n", "<Leader>fy", "<cmd>Telescope symbols<cr>", {})
+vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope live_grep<cr>", {})
+vim.keymap.set("n", "<Leader>fr", "<cmd>Telescope registers<cr>", {})
+vim.keymap.set("n", "<Leader>fb", "<cmd>Telescope buffers<cr>", {})
+vim.keymap.set("n", "<Leader>fo", "<cmd>Telescope lsp_document_symbols<cr>")
+
+vim.api.nvim_create_user_command("GitStatus", "Telescope git_status", { desc = "Show status of files" })

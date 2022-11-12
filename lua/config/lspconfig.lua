@@ -4,8 +4,11 @@
 local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
 
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true, desc = "Toggle diagnostics" }
 vim.keymap.set("n", "<Leader>dd", vim.diagnostic.setloclist, opts)
+vim.api.nvim_create_user_command("ToggleDiagnostics", "lua vim.diagnostics.setloclist()", {
+    desc = "Toggle Diagnostics",
+})
 
 local on_attach = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }

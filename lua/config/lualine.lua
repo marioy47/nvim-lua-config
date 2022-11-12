@@ -1,10 +1,10 @@
 -- config/lualine.lua
 
+-- All sections here: https://github.com/nvim-lualine/lualine.nvim#available-components
+
 require("lualine").setup({
-    sections = { -- All sections here: https://github.com/nvim-lualine/lualine.nvim#available-components
-        lualine_a = {},
-        lualine_b = { "branch", "diagnostics" },
-        lualine_c = {
+    sections = {
+        lualine_a = {
             {
                 "filename",
                 file_status = true,
@@ -13,7 +13,10 @@ require("lualine").setup({
                 symbols = { modified = "[]", readonly = " " },
             },
         },
+        lualine_b = {},
+        lualine_c = {},
         lualine_x = {
+            "branch",
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },

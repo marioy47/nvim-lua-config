@@ -58,23 +58,33 @@ use({ -- Another cool dark theme
         require("config.nightfox")
     end,
 })
-use({ -- Whichkey: popup help for keymaps
+use({ -- Fast commenting! Enable gcc and gcb for comments
+    "numToStr/Comment.nvim",
+    config = function()
+        require("Comment").setup()
+    end,
+})
+use({ -- Inline help for key combinations on normal mode
     "folke/which-key.nvim",
     config = function()
         require("config.which-key")
     end,
 })
-use({ -- Make the status line beautiful and more useful
-    "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+use({ -- Override nvim-web-devicons with nvim-material-icon (lualine, nvim-tree, etc)
+    "kyazdani42/nvim-web-devicons",
+    requires = {
+        "DaikyXendo/nvim-material-icon",
+    },
     config = function()
-        require("config.lualine")
+        require("nvim-web-devicons").setup({
+            override = require("nvim-material-icon").get_icons(),
+        })
     end,
 })
-use({ -- Fast commenting! Enable gcc and gcb for comments
-    "numToStr/Comment.nvim",
+use({ -- Make the status line beautiful and more useful
+    "nvim-lualine/lualine.nvim",
     config = function()
-        require("Comment").setup()
+        require("config.lualine")
     end,
 })
 use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
@@ -89,7 +99,7 @@ use({ -- Nvim-tree: Sidebar explorer and NetRW replacement
 use({ -- Install and configure treesitter languages
     "nvim-treesitter/nvim-treesitter",
     run = function()
-        require("nvim-treesitter.install").update({ with_sync = true })
+        require("nvim-treesitter.install").update({ with_sync = true }) -- Avoids TSUpdate failing on first run
     end,
     config = function()
         require("config.treesitter")
@@ -104,16 +114,20 @@ use({ -- Install language servers using `:MasonInstall <server>`
         require("config.mason")
     end,
 })
-use({ -- Configure LSP client
+-- use({ -- Debugger (:MasonInstall php-debug-adapter)
+--     "mfussenegger/nvim-dap",
+--     config = function() end,
+-- })
+use({ -- Configure Language Server Protocol
     "neovim/nvim-lspconfig",
     requires = {
-        "b0o/SchemaStore.nvim",
+        "b0o/SchemaStore.nvim", -- For Json LSP
     },
     config = function()
         require("config.lspconfig")
     end,
 })
-use({
+use({ -- Better dianostics and inline doc display
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
@@ -149,16 +163,21 @@ use({ -- Fizzy finder to find files, grep content, list buffers, etc.
     tag = "0.1.0",
     requires = {
         "nvim-lua/plenary.nvim",
+        "BurntSushi/ripgrep",
+        "nvim-telescope/telescope-symbols.nvim",
     },
     config = function()
         require("config.telescope")
     end,
 })
+use({ -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
+    "lewis6991/gitsigns.nvim",
+    config = function()
+        require("config.gitsigns")
+    end,
+})
 use({ -- Add indentation guides even on blank lines
     "lukas-reineke/indent-blankline.nvim",
-})
-use({ -- Align items with `:SimpleAlign --` for instance
-    "kg8m/vim-simple-align",
 })
 use({ -- Support for .editorconfig files
     "gpanders/editorconfig.nvim",
@@ -169,7 +188,7 @@ use({ -- Show the actual color or RGB or CMYK values in your code
         require("colorizer").setup()
     end,
 })
-use({
+use({ -- Auto add closing quotes, brackets, tags, etc
     "windwp/nvim-autopairs",
     config = function()
         require("nvim-autopairs").setup({})
@@ -180,12 +199,6 @@ use({ -- Preview current markdown file with :MarkdownPreview
     run = "cd app && npm install",
     ft = { "markdown" },
     cmd = { "MarkdownPreview", "MarkdownPreviewToggle" }, -- Load on this commands
-})
-use({ -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
-    "lewis6991/gitsigns.nvim",
-    config = function()
-        require("config.gitsigns")
-    end,
 })
 use({ -- Shows you inside your `packaje.json` which packages can be upgraded
     "vuki656/package-info.nvim",

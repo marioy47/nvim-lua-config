@@ -22,9 +22,15 @@ gs.setup({
     current_line_blame_formatter = "<author> • <author_time:%Y-%m-%d> • <summary>",
 })
 
-vim.api.nvim_create_user_command("ToggleDeleted", "lua require('gitsigns').toggle_deleted()", {
+vim.api.nvim_create_user_command("ToggleGitDeleted", "lua require('gitsigns').toggle_deleted()", {
     desc = "Git toggle preview deleted lines (gitsigns)",
 })
-vim.api.nvim_create_user_command("ToggleBlame", "lua require('gitsigns').toggle_current_line_blame()", {
+vim.api.nvim_create_user_command("GitDeleted", "lua require('gitsigns').toggle_deleted()", {
+    desc = "Git toggle preview deleted lines (gitsigns)",
+})
+vim.api.nvim_create_user_command("ToggleGitBlame", "lua require('gitsigns').toggle_current_line_blame()", {
+    desc = "Git toggle line blame for current line (gitsigns)",
+})
+vim.api.nvim_create_user_command("GitBlame", "lua require('gitsigns').toggle_current_line_blame()", {
     desc = "Git toggle line blame for current line (gitsigns)",
 })
