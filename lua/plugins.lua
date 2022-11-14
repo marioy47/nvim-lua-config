@@ -58,7 +58,7 @@ use({ -- Another cool dark theme
         require("config.nightfox")
     end,
 })
-use({
+use({ -- Material theme with multiple subthemes
     "marko-cerovac/material.nvim",
     config = function()
         require("config.material")
@@ -120,10 +120,6 @@ use({ -- Install language servers using `:MasonInstall <server>`
         require("config.mason")
     end,
 })
--- use({ -- Debugger (Install debuggers with :MasonInstall php-debug-adapter)
---     "mfussenegger/nvim-dap",
---     config = function() end,
--- })
 use({ -- Configure Language Server Protocol
     "neovim/nvim-lspconfig",
     requires = {
@@ -169,8 +165,10 @@ use({ -- Fizzy finder to find files, grep content, list buffers, etc.
     tag = "0.1.0",
     requires = {
         "nvim-lua/plenary.nvim",
-        "BurntSushi/ripgrep",
-        "nvim-telescope/telescope-symbols.nvim",
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
+        -- "nvim-telescope/telescope-symbols.nvim",
+        -- "nvim-telescope/telescope-dap.nvim",
     },
     config = function()
         require("config.telescope")
@@ -182,6 +180,16 @@ use({ -- Show GIT changes on the gutter and add some git visualiztions with <Lea
         require("config.gitsigns")
     end,
 })
+-- use({ -- Debugger (Install debuggers with :MasonInstall php-debug-adapter)
+--     "mfussenegger/nvim-dap",
+--     "rcarriga/nvim-dap-ui",
+--     "theHamsta/nvim-dap-virtual-text",
+--     requires = {
+--     },
+--     config = function()
+--         require("config.nvim-dap")
+--     end,
+-- })
 use({ -- Add indentation guides even on blank lines
     "lukas-reineke/indent-blankline.nvim",
 })

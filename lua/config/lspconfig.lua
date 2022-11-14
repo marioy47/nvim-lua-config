@@ -16,8 +16,10 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<Leader>lf", function()
         vim.lsp.buf.format({ async = true })
     end, bufopts)
+    -- Additional keymaps trought LspSaga
 end
 
+-- Sumneko (Lua) configuration
 lspconfig.sumneko_lua.setup({
     on_attach = on_attach,
     settings = {
@@ -42,7 +44,7 @@ lspconfig.sumneko_lua.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- JavaScript/TypeScript configuration
+-- TSServer (JavaScript/TypeScript) configuration
 lspconfig.tsserver.setup({
     on_attach = on_attach,
 })
@@ -74,6 +76,21 @@ lspconfig.jsonls.setup({
         json = {
             schemas = require("schemastore").json.schemas(),
             validate = { enable = true },
+        },
+    },
+})
+
+-- Emmet completion configuration
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+    init_options = {
+        html = {
+            options = {
+                -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+                ["bem.enabled"] = true,
+            },
         },
     },
 })

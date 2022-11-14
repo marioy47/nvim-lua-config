@@ -1,4 +1,5 @@
 -- lua/config/mason.lua
+
 require("mason").setup({
     ui = {
         icons = {
@@ -10,5 +11,10 @@ require("mason").setup({
 })
 
 require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "intelephense", "html", "cssls", "tsserver" },
+    ensure_installed = {
+        "cssls",
+        "html",
+        "intelephense",
+        "tsserver",
+    },
 })
