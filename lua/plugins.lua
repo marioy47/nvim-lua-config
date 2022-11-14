@@ -208,6 +208,12 @@ use({ -- Auto add closing quotes, brackets, tags, etc
         require("nvim-autopairs").setup({})
     end,
 })
+use({
+    "Vonr/align.nvim",
+    config = function()
+        require("config.align")
+    end,
+})
 use({ -- Preview current markdown file with :MarkdownPreview
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
