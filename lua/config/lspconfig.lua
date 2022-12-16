@@ -16,6 +16,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<Leader>lf", function()
         vim.lsp.buf.format({ async = true })
     end, bufopts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
     -- Additional keymaps trought LspSaga
 end
 

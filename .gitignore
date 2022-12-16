@@ -4,3 +4,4 @@ stdpath/nvim/plugin
 plugin
 node_modules
 spell/*.spl
+.luarc.json
