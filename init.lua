@@ -5,16 +5,16 @@
 --vim.g.loaded_netrwPlugin = 1
 
 -- Vim native options. Make it more modern
-require("options")
+require 'options'
 
 -- Vim commands and autocommands
-require("commands")
+require 'commands'
 
 -- All keymaps in one file for easier research
-require("keymaps")
+require 'keymaps'
 
 -- Plugins and plugin configuration
-require("plugins")
+require 'plugins'
 
 -- For a list of Colors, execute  `:echo getcompletion('', 'color')`
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd 'colorscheme tokyonight-night'
