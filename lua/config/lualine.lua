@@ -8,7 +8,7 @@ require("lualine").setup({
             {
                 "filename",
                 file_status = true,
-                path = 1, -- show relativ path
+                path = 1, -- show relative path
                 shorting_target = 40,
                 symbols = { modified = "[]", readonly = " " },
             },
@@ -35,5 +35,11 @@ require("lualine").setup({
         lualine_x = {},
         lualine_y = {},
         lualine_z = {},
+    },
+    options = {
+        disabled_filetypes = {
+            "packer",
+            "NvimTree",
+        },
     },
 })

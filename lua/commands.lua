@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank()
     end,
-    desc = "Hightlight any yanked line",
+    desc = "Highlight any yanked line",
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -19,9 +19,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     command = [[:%s/\s\+$//e]],
-    desc = "Remove all trailing whitespace on save",
+    desc = "Remove all trailing white space on save",
 })
 
 vim.api.nvim_create_user_command("Actions", "lua vim.lsp.buf.code_action()", {
-    desc = "Use :Actions command to execute LSP's code_action() function",
+    desc = "Use `:Actions` command to execute LSP's code_action() function",
 })

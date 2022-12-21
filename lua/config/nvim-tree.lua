@@ -8,8 +8,8 @@ require("nvim-tree").setup({
         side = "right",
         mappings = {
             list = {
-                { key = "<C-k>", action = "" }, -- Conflicts with other plugins
-                { key = "i", action = "toggle_file_info" }, -- Friendlier with Spanish
+                { key = "<C-k>", action = "" }, -- Avoid conflicts with other plugins
+                { key = "i", action = "toggle_file_info" }, -- Friendlier with Spanish Keyboards
             },
         },
     },
@@ -17,9 +17,6 @@ require("nvim-tree").setup({
         add_trailing = true,
         indent_markers = {
             enable = true,
-        },
-        icons = {
-            git_placement = "after",
         },
         special_files = { "README.md", "Makefile", "MAKEFILE", "package.json", "composer.json" },
         highlight_opened_files = "all",
