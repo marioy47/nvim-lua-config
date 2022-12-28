@@ -44,9 +44,9 @@ vim.keymap.set('v', 'p', '"_dP')
 vim.keymap.set('i', '<C-y>', '<Esc><C-y>a', opts)
 vim.keymap.set('i', '<C-e>', '<Esc><C-e>a', opts)
 
--- Move line up and down with J/K
-vim.keymap.set('x', 'J', ":move '>+1<CR>gv-gv", opts)
-vim.keymap.set('x', 'K', ":move '<-2<CR>gv-gv", opts)
+-- Move line up and down with J/K and keep indenting
+vim.keymap.set('x', 'J', ":move '>+1<CR>gv=gv", opts)
+vim.keymap.set('x', 'K', ":move '<-2<CR>gv=gv", opts)
 
 -- Resize windows with Shift+<arrow>
 vim.keymap.set('n', '<S-Up>', ':resize +2<CR>', opts)
@@ -56,6 +56,12 @@ vim.keymap.set('n', '<S-Right>', ':vertical resize +2<CR>', opts)
 
 -- Clear matches with Ctrl+l
 vim.keymap.set('n', '<C-l>', ':noh<Cr>', opts)
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- [[ Buffers ]]
 vim.keymap.set('n', '<Leader>bp', '<cmd>bprevious<cr>', {

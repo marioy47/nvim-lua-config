@@ -10,7 +10,8 @@
     "format:md": "markdownlint -f README.md",
     "format": "npm-run-all -p format:*",
     "setup": "nvim --headless +PackerSync",
-    "prepare": "husky install"
+    "postinstall": "husky install",
+    "reset": "rm -rf node_modules plugin/packer_compiled.lua ~/.local/share/nvim ~/.local/state/nvim"
   },
   "keywords": [],
   "author": "",

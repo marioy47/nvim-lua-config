@@ -2,7 +2,7 @@
 
 require('nvim-tree').setup {
   open_on_setup = true,
-  view = {
+  view = { -- Make it wider and to the right
     adaptive_size = true,
     width = 45,
     side = 'right',
@@ -13,7 +13,7 @@ require('nvim-tree').setup {
       },
     },
   },
-  renderer = {
+  renderer = { -- Show file git status and markers for indentation
     add_trailing = true,
     indent_markers = {
       enable = true,
@@ -25,10 +25,10 @@ require('nvim-tree').setup {
     enable = true,
     show_on_dirs = true,
   },
-  git = {
+  git = { -- Do not hide .gitignore files
     ignore = false,
   },
-  actions = {
+  actions = { -- Autoclose and auto-rezise
     open_file = {
       quit_on_open = true,
       resize_window = true,

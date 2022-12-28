@@ -64,16 +64,32 @@ use { -- Material theme with multiple subthemes
     require 'config.material'
   end,
 }
+use { -- Inline help for key combinations on normal mode
+  'folke/which-key.nvim',
+  config = function()
+    require('which-key').setup {
+      plugins = {
+        spelling = {
+          enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+        },
+      },
+      window = {
+        margin = { 0, 0, 0, 0 }, -- remove window margin [top, right, bottom, left]
+        padding = { 0, 0, 0, 0 }, -- remove window padding [top, right, bottom, left]
+      },
+    }
+  end,
+}
 use { -- Fast commenting! Enable gcc and gcb for comments
   'numToStr/Comment.nvim',
   config = function()
     require('Comment').setup()
   end,
 }
-use { -- Inline help for key combinations on normal mode
-  'folke/which-key.nvim',
+use {
+  'Vonr/align.nvim',
   config = function()
-    require 'config.which-key'
+    require 'config.align'
   end,
 }
 use { -- Override nvim-web-devicons with nvim-material-icon (lualine, nvim-tree, etc)
@@ -93,110 +109,22 @@ use { -- Make the status line beautiful and more useful
     require 'config.lualine'
   end,
 }
-use { -- Nvim-tree: Sidebar explorer and NetRW replacement
-  'kyazdani42/nvim-tree.lua',
-  requires = {
-    'kyazdani42/nvim-web-devicons', -- optional, for file icon
-  },
-  config = function()
-    require 'config.nvim-tree'
-  end,
-}
-use { -- Install and configure treesitter languages
-  'nvim-treesitter/nvim-treesitter',
-  run = function()
-    require('nvim-treesitter.install').update { with_sync = true } -- Avoids TSUpdate failing on first run
-  end,
-  config = function()
-    require 'config.treesitter'
-  end,
-}
-use { -- Install language servers using `:MasonInstall <server>`
-  'williamboman/mason.nvim',
-  requires = {
-    'williamboman/mason-lspconfig.nvim',
-  },
-  config = function()
-    require 'config.mason'
-  end,
-}
-use { -- Configure Language Server Protocol
-  'neovim/nvim-lspconfig',
-  requires = {
-    'b0o/SchemaStore.nvim', -- For Json LSP
-  },
-  config = function()
-    require 'config.lspconfig'
-  end,
-}
-use { -- Better dianostics and inline doc display
-  'glepnir/lspsaga.nvim',
-  branch = 'main',
-  config = function()
-    require 'config.lspsaga'
-  end,
-}
-use { -- Null-LS Use external formatters and linters
-  'jose-elias-alvarez/null-ls.nvim',
-  config = function()
-    require 'config.null-ls'
-  end,
-  requires = {
-    'nvim-lua/plenary.nvim',
-  },
-}
-use { -- Autocomplete engine with plugins for LSP, Snippets, Paths, Commands, etc.
-  'hrsh7th/nvim-cmp',
-  requires = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lua',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-git',
-    'L3MON4D3/LuaSnip',
-  },
-  config = function()
-    require 'config.cmp'
-  end,
-}
-use { -- Fizzy finder to find files, grep content, list buffers, etc.
-  'nvim-telescope/telescope.nvim',
-  tag = '0.1.0',
-  requires = {
-    'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope-live-grep-args.nvim',
-    'nvim-telescope/telescope-ui-select.nvim',
-    -- "nvim-telescope/telescope-symbols.nvim",
-    -- "nvim-telescope/telescope-dap.nvim",
-  },
-  config = function()
-    require 'config.telescope'
-  end,
-}
-use { -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
-  'lewis6991/gitsigns.nvim',
-  config = function()
-    require 'config.gitsigns'
-  end,
-}
--- use({ -- Debugger (Install debuggers with :MasonInstall php-debug-adapter)
---     "mfussenegger/nvim-dap",
---     "rcarriga/nvim-dap-ui",
---     "theHamsta/nvim-dap-virtual-text",
---     requires = {
---     },
---     config = function()
---         require("config.nvim-dap")
---     end,
--- })
-use { -- Add indentation guides even on blank lines
-  'lukas-reineke/indent-blankline.nvim',
-}
 use { -- Support for .editorconfig files
   'gpanders/editorconfig.nvim',
 }
-use { -- Show the actual color or RGB or CMYK values in your code
+use { -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+}
+use { -- Add indentation guides even on blank lines
+  'lukas-reineke/indent-blankline.nvim',
+  config = function()
+    require('indent_blankline').setup {
+      char = '┊',
+      show_trailing_blankline_indent = false,
+    }
+  end,
+}
+use { -- Show the actual color or RGB or CMYK values in your code (pe #ff00ee)
   'norcalli/nvim-colorizer.lua',
   config = function()
     require('colorizer').setup()
@@ -208,10 +136,19 @@ use { -- Auto add closing quotes, brackets, tags, etc
     require('nvim-autopairs').setup {}
   end,
 }
-use {
-  'Vonr/align.nvim',
+use { -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
+  'lewis6991/gitsigns.nvim',
   config = function()
-    require 'config.align'
+    require 'config.gitsigns'
+  end,
+}
+use { -- Nvim-tree: Sidebar explorer and NetRW replacement
+  'kyazdani42/nvim-tree.lua',
+  requires = {
+    'kyazdani42/nvim-web-devicons', -- optional, for file icon
+  },
+  config = function()
+    require 'config.nvim-tree'
   end,
 }
 use { -- Preview current markdown file with :MarkdownPreview
@@ -220,12 +157,79 @@ use { -- Preview current markdown file with :MarkdownPreview
   ft = { 'markdown' },
   cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' }, -- Load on this commands
 }
-use { -- Shows you inside your `pacakge.json` which packages can be upgraded (:TogglePackageInfo)
-  'vuki656/package-info.nvim',
-  requires = 'MunifTanjim/nui.nvim',
+use { -- Fizzy finder to find files, grep content, list buffers, etc.
+  'nvim-telescope/telescope.nvim',
+  tag = '0.1.0',
+  requires = {
+    'nvim-lua/plenary.nvim',
+  },
   config = function()
-    require 'config.package-info'
+    require 'config.telescope'
   end,
+}
+use { -- Use native FZF in telescope
+  'nvim-telescope/telescope-fzf-native.nvim',
+  run = 'make',
+  cond = vim.fn.executable 'make' == 1,
+}
+use { -- Install and configure treesitter languages
+  'nvim-treesitter/nvim-treesitter',
+  run = function()
+    require('nvim-treesitter.install').update { with_sync = true } -- Avoids TSUpdate failing on first run
+  end,
+  config = function()
+    require 'config.treesitter'
+  end,
+}
+use { -- Additional text objects (similar to paragraph manipulation) via treesitter
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  after = 'nvim-treesitter',
+}
+use { -- LSP Configuration & Plugins
+  'neovim/nvim-lspconfig',
+  requires = {
+    'williamboman/mason.nvim', -- Automatically install LSPs to stdpath for neovim
+    'williamboman/mason-lspconfig.nvim',
+    'j-hui/fidget.nvim', -- Useful status updates for LSP
+    'folke/neodev.nvim', -- Additional lua configuration, makes nvim stuff amazing
+  },
+  config = function()
+    require 'config.lspconfig'
+  end,
+}
+use { -- Access to the [SchemaStore](https://github.com/SchemaStore/schemastore) catalog
+  'b0o/schemastore.nvim',
+  config = function()
+    require('lspconfig').jsonls.setup {
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    }
+  end,
+}
+use { -- Autocompletion
+  'hrsh7th/nvim-cmp',
+  requires = {
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+  },
+  config = function()
+    require 'config.cmp'
+  end,
+}
+use { -- Null-LS Use external formatters and linters
+  'jose-elias-alvarez/null-ls.nvim',
+  config = function()
+    require 'config.null-ls'
+  end,
+  requires = {
+    'nvim-lua/plenary.nvim',
+  },
 }
 --[[
   Finish plugin configuration
@@ -234,5 +238,9 @@ use { -- Shows you inside your `pacakge.json` which packages can be upgraded (:T
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if PACKER_BOOTSTRAP then
+  print '=================================='
+  print '    Plugins are being installed'
+  print '    Wait until it completes, then restart nvim'
+  print '=================================='
   require('packer').sync()
 end

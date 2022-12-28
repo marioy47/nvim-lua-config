@@ -1,35 +1,74 @@
 -- lua/config/gitsigns.lua
 
-local gs = require 'gitsigns'
-
-local map = function(mode, l, r, buf, desc)
-  local opts = { noremap = true, silent = true, buffer = buf, desc = desc }
-  vim.keymap.set(mode, l, r, opts)
-end
-
-local on_attach = function(buf)
-  map('n', '<Leader>gh', gs.preview_hunk, buf, 'Preview hunk popup')
-  map('n', '<Leader>gb', gs.blame_line, buf, 'Git blame for the line')
-  map('n', '<Leader>gd', gs.blame_line, buf, 'Git diff current buffer')
-end
-
-gs.setup {
-  on_attach = on_attach,
+require('gitsigns').setup {
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
   numhl = true,
   current_line_blame_opts = {
     virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
   },
   current_line_blame_formatter = '<author> • <author_time:%Y-%m-%d> • <summary>',
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then
+        return ']c'
+      end
+      vim.schedule(function()
+        gs.next_hunk()
+      end)
+      return '<Ignore>'
+    end, { expr = true })
+
+    map('n', '[c', function()
+      if vim.wo.diff then
+        return '[c'
+      end
+      vim.schedule(function()
+        gs.prev_hunk()
+      end)
+      return '<Ignore>'
+    end, { expr = true })
+
+    -- Actions
+    map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', { desc = 'Git reset hunk' })
+    map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Git reset hunk' })
+    map('n', '<leader>hS', gs.stage_buffer, { desc = 'Git stage buffer' })
+    map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Git undo stage hunk' })
+    map('n', '<leader>hR', gs.reset_buffer, { desc = 'Git reset buffer' })
+    map('n', '<leader>hp', gs.preview_hunk, { desc = 'Git preview hunk' })
+    map('n', '<leader>hb', function()
+      gs.blame_line { full = true }
+    end, { desc = 'Git blame line' })
+    map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'Git toggle current line blame' })
+    map('n', '<leader>hd', gs.diffthis, { desc = 'Git diff this' })
+    map('n', '<leader>hD', function()
+      gs.diffthis '~'
+    end, { desc = 'Git diff this ~' })
+    map('n', '<leader>td', gs.toggle_deleted, { desc = 'Git toggle deleted' })
+
+    -- Text object
+    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'Git select hunk' })
+  end,
 }
 
-vim.api.nvim_create_user_command('ToggleGitDeleted', "lua require('gitsigns').toggle_deleted()", {
-  desc = 'Git toggle preview deleted lines (gitsigns)',
-})
+-- Commands
+
 vim.api.nvim_create_user_command('GitDeleted', "lua require('gitsigns').toggle_deleted()", {
   desc = 'Git toggle preview deleted lines (gitsigns)',
-})
-vim.api.nvim_create_user_command('ToggleGitBlame', "lua require('gitsigns').toggle_current_line_blame()", {
-  desc = 'Git toggle line blame for current line (gitsigns)',
 })
 vim.api.nvim_create_user_command('GitBlame', "lua require('gitsigns').toggle_current_line_blame()", {
   desc = 'Git toggle line blame for current line (gitsigns)',

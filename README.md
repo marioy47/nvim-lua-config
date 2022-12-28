@@ -43,5 +43,4 @@ The current setup will try to install some LSP servers for you: `bash`, `intelep
 ## TODO
 
 - [ ] Configure language server [using json](https://github.com/tamago324/nlsp-settings.nvim) instead of lua (allows you to have config per-project)
-- [ ] Verify it works on React
 - [ ] Format does not work with Guttenberg

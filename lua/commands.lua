@@ -2,6 +2,8 @@
 
 vim.cmd 'autocmd!'
 
+-- [[ Autocommands ]] --
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
   callback = function()
@@ -22,6 +24,13 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   desc = 'Remove all trailing white space on save',
 })
 
+--[[ User Commands ]]
+--
+
 vim.api.nvim_create_user_command('Actions', 'lua vim.lsp.buf.code_action()', {
   desc = "Use `:Actions` command to execute LSP's code_action() function",
+})
+
+vim.api.nvim_create_user_command('Diagnostics', 'lua vim.diagnostics.setloclist()', {
+  desc = 'Toggle Diagnostics',
 })
