@@ -55,13 +55,13 @@ use { -- Port of VSCode's Tokio Night theme
 use { -- Another cool dark theme
   'EdenEast/nightfox.nvim',
   config = function()
-    require 'config.nightfox'
+    require 'plugins.nightfox'
   end,
 }
 use { -- Material theme with multiple subthemes
   'marko-cerovac/material.nvim',
   config = function()
-    require 'config.material'
+    require 'plugins.material'
   end,
 }
 use { -- Inline help for key combinations on normal mode
@@ -89,7 +89,7 @@ use { -- Fast commenting! Enable gcc and gcb for comments
 use {
   'Vonr/align.nvim',
   config = function()
-    require 'config.align'
+    require 'plugins.align'
   end,
 }
 use { -- Override nvim-web-devicons with nvim-material-icon (lualine, nvim-tree, etc)
@@ -106,7 +106,7 @@ use { -- Override nvim-web-devicons with nvim-material-icon (lualine, nvim-tree,
 use { -- Make the status line beautiful and more useful
   'nvim-lualine/lualine.nvim',
   config = function()
-    require 'config.lualine'
+    require 'plugins.lualine'
   end,
 }
 use { -- Support for .editorconfig files
@@ -139,7 +139,7 @@ use { -- Auto add closing quotes, brackets, tags, etc
 use { -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
   'lewis6991/gitsigns.nvim',
   config = function()
-    require 'config.gitsigns'
+    require 'plugins.gitsigns'
   end,
 }
 use { -- Nvim-tree: Sidebar explorer and NetRW replacement
@@ -148,7 +148,7 @@ use { -- Nvim-tree: Sidebar explorer and NetRW replacement
     'kyazdani42/nvim-web-devicons', -- optional, for file icon
   },
   config = function()
-    require 'config.nvim-tree'
+    require 'plugins.nvim-tree'
   end,
 }
 use { -- Preview current markdown file with :MarkdownPreview
@@ -164,7 +164,7 @@ use { -- Fizzy finder to find files, grep content, list buffers, etc.
     'nvim-lua/plenary.nvim',
   },
   config = function()
-    require 'config.telescope'
+    require 'plugins.telescope'
   end,
 }
 use { -- Use native FZF in telescope
@@ -178,7 +178,7 @@ use { -- Install and configure treesitter languages
     require('nvim-treesitter.install').update { with_sync = true } -- Avoids TSUpdate failing on first run
   end,
   config = function()
-    require 'config.treesitter'
+    require 'plugins.treesitter'
   end,
 }
 use { -- Additional text objects (similar to paragraph manipulation) via treesitter
@@ -194,7 +194,7 @@ use { -- LSP Configuration & Plugins
     'folke/neodev.nvim', -- Additional lua configuration, makes nvim stuff amazing
   },
   config = function()
-    require 'config.lspconfig'
+    require 'plugins.lspconfig'
   end,
 }
 use { -- Access to the [SchemaStore](https://github.com/SchemaStore/schemastore) catalog
@@ -219,13 +219,13 @@ use { -- Autocompletion
     'saadparwaiz1/cmp_luasnip',
   },
   config = function()
-    require 'config.cmp'
+    require 'plugins.cmp'
   end,
 }
 use { -- Null-LS Use external formatters and linters
   'jose-elias-alvarez/null-ls.nvim',
   config = function()
-    require 'config.null-ls'
+    require 'plugins.null-ls'
   end,
   requires = {
     'nvim-lua/plenary.nvim',
