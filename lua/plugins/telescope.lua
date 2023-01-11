@@ -1,16 +1,17 @@
 -- config/telescope.lua
+-- Based on "kickstart.nvim"
 
 -- Telescope window configuration
 require('telescope').setup {
   defaults = {
-    mappings = { -- Documentation ask for you to set them up
+    mappings = { -- Documentation ask's for you to set them up
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
     },
     sorting_strategy = 'ascending',
-    --     layout_strategy = "horizontal",
+    -- layout_strategy = " -- Dihorizontal",
     layout_config = {
       horizontal = {
         prompt_position = 'top',

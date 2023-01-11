@@ -1,47 +1,31 @@
 -- lua/plugins.lua
 
--- Place where packer is goint to be saved
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+-- Execute `:so %`,  `:PackerSync` and `:PackerCompile` after each change
 
--- Install packer from github if is not in our system
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = vim.fn.system {
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path,
-  }
-  print 'Installing packer close and reopen Neovim...'
-  vim.cmd [[packadd packer.nvim]]
-end
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
-
--- Use a protected require call (pcall) so we don't error out on first use
-local status_ok, packer = pcall(require, 'packer')
-if not status_ok then
-  return
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
--- Show packer messages in a popup. Looks cooler
-packer.init {
+local packer_bootstrap = ensure_packer()
+
+require('packer').reset()
+require('packer').init {
+  compile_path = vim.fn.stdpath 'data' .. '/site/plugin/packer_compiled.lua', -- Now we don't need to gitignore the ./plugins directory
   display = {
     open_fn = function()
-      return require('packer.util').float { border = 'rounded' }
+      return require('packer.util').float { border = 'solid' }
     end,
   },
 }
 
--- Alt installation of packer without a function
-packer.reset()
-local use = packer.use
+local use = require('packer').use
 
 --[[
   Start adding plugins here
@@ -51,17 +35,11 @@ use { -- Have packer manage itself
 }
 use { -- Port of VSCode's Tokio Night theme
   'folke/tokyonight.nvim',
-}
-use { -- Another cool dark theme
-  'EdenEast/nightfox.nvim',
   config = function()
-    require 'plugins.nightfox'
-  end,
-}
-use { -- Material theme with multiple subthemes
-  'marko-cerovac/material.nvim',
-  config = function()
-    require 'plugins.material'
+    require('tokyonight').setup {
+      styles = { functions = 'bold', keywords = 'italic' },
+    }
+    vim.cmd.colorscheme 'tokyonight-moon'
   end,
 }
 use { -- Inline help for key combinations on normal mode
@@ -86,21 +64,13 @@ use { -- Fast commenting! Enable gcc and gcb for comments
     require('Comment').setup()
   end,
 }
-use {
+use { -- Align items to a character. Useful on WordPress development.
   'Vonr/align.nvim',
   config = function()
-    require 'plugins.align'
-  end,
-}
-use { -- Override nvim-web-devicons with nvim-material-icon (lualine, nvim-tree, etc)
-  'kyazdani42/nvim-web-devicons',
-  requires = {
-    'DaikyXendo/nvim-material-icon',
-  },
-  config = function()
-    require('nvim-web-devicons').setup {
-      override = require('nvim-material-icon').get_icons(),
-    }
+    local NS = { noremap = true, silent = true }
+    vim.keymap.set('x', 'ga', function()
+      require('align').align_to_string(false, true, true)
+    end, NS) -- Aligns to a string, looking left and with previews
   end,
 }
 use { -- Make the status line beautiful and more useful
@@ -109,10 +79,7 @@ use { -- Make the status line beautiful and more useful
     require 'plugins.lualine'
   end,
 }
-use { -- Support for .editorconfig files
-  'gpanders/editorconfig.nvim',
-}
-use { -- Detect tabstop and shiftwidth automatically
+use { -- Detect tabstop and shiftwidth automatically with .editorconfig support
   'tpope/vim-sleuth',
 }
 use { -- Add indentation guides even on blank lines
@@ -127,7 +94,13 @@ use { -- Add indentation guides even on blank lines
 use { -- Show the actual color or RGB or CMYK values in your code (pe #ff00ee)
   'norcalli/nvim-colorizer.lua',
   config = function()
-    require('colorizer').setup()
+    require('colorizer').setup {
+      'html',
+      'css',
+      'javascript',
+      'scss',
+      'sass',
+    }
   end,
 }
 use { -- Auto add closing quotes, brackets, tags, etc
@@ -181,55 +154,44 @@ use { -- Install and configure treesitter languages
     require 'plugins.treesitter'
   end,
 }
-use { -- Additional text objects (similar to paragraph manipulation) via treesitter
+use { -- Additional text objects (similar to paragraph manipulation) via treesitter with gS and gJ
   'nvim-treesitter/nvim-treesitter-textobjects',
   after = 'nvim-treesitter',
 }
-use { -- LSP Configuration & Plugins
-  'neovim/nvim-lspconfig',
-  requires = {
-    'williamboman/mason.nvim', -- Automatically install LSPs to stdpath for neovim
-    'williamboman/mason-lspconfig.nvim',
-    'j-hui/fidget.nvim', -- Useful status updates for LSP
-    'folke/neodev.nvim', -- Additional lua configuration, makes nvim stuff amazing
-  },
+use { -- Split arrays and methods onto multiple lines, or join them back up.
+  'AndrewRadev/splitjoin.vim',
   config = function()
-    require 'plugins.lspconfig'
+    vim.g.splitjoin_html_attributes_bracket_on_new_line = 1
+    vim.g.splitjoin_trailing_comma = 1
+    vim.g.splitjoin_php_method_chain_full = 1
   end,
 }
-use { -- Access to the [SchemaStore](https://github.com/SchemaStore/schemastore) catalog
-  'b0o/schemastore.nvim',
-  config = function()
-    require('lspconfig').jsonls.setup {
-      settings = {
-        json = {
-          schemas = require('schemastore').json.schemas(),
-          validate = { enable = true },
-        },
-      },
-    }
-  end,
-}
-use { -- Autocompletion
-  'hrsh7th/nvim-cmp',
+use { -- Language Server configuration
+  'VonHeikemen/lsp-zero.nvim',
   requires = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
+    -- LSP Support
+    { 'neovim/nvim-lspconfig' },
+    { 'williamboman/mason.nvim' },
+    { 'williamboman/mason-lspconfig.nvim' },
+
+    -- Autocompletion
+    { 'hrsh7th/nvim-cmp' },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-path' },
+    { 'saadparwaiz1/cmp_luasnip' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-nvim-lua' },
+
+    -- Snippets
+    { 'L3MON4D3/LuaSnip' },
+    { 'rafamadriz/friendly-snippets' },
+
+    -- Useful status updates for LSP
+    { 'j-hui/fidget.nvim' },
   },
   config = function()
-    require 'plugins.cmp'
+    require 'plugins.lsp'
   end,
-}
-use { -- Null-LS Use external formatters and linters
-  'jose-elias-alvarez/null-ls.nvim',
-  config = function()
-    require 'plugins.null-ls'
-  end,
-  requires = {
-    'nvim-lua/plenary.nvim',
-  },
 }
 --[[
   Finish plugin configuration
@@ -237,7 +199,7 @@ use { -- Null-LS Use external formatters and linters
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
-if PACKER_BOOTSTRAP then
+if packer_bootstrap then
   print '=================================='
   print '    Plugins are being installed'
   print '    Wait until it completes, then restart nvim'

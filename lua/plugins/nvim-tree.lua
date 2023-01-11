@@ -2,7 +2,8 @@
 
 require('nvim-tree').setup {
   open_on_setup = true,
-  view = { -- Make it wider and to the right
+  -- Change sidebar position and size
+  view = {
     adaptive_size = true,
     width = 45,
     side = 'right',
@@ -13,7 +14,8 @@ require('nvim-tree').setup {
       },
     },
   },
-  renderer = { -- Show file git status and markers for indentation
+  -- Make it prettier and have more git information
+  renderer = {
     add_trailing = true,
     indent_markers = {
       enable = true,
@@ -25,15 +27,16 @@ require('nvim-tree').setup {
     enable = true,
     show_on_dirs = true,
   },
-  git = { -- Do not hide .gitignore files
-    ignore = false,
+  git = {
+    ignore = false, -- Do not hide .gitignore files
   },
-  actions = { -- Autoclose and auto-rezise
+  -- Change the default behav
+  actions = {
     open_file = {
-      quit_on_open = true,
-      resize_window = true,
+      quit_on_open = true, -- Autoclose the sidebar when a file gets opened
+      resize_window = true, -- Resize the sidebar when the windows resizes
       window_picker = {
-        enable = false,
+        enable = false, -- Ask the user on which window to open when split are open
       },
     },
   },

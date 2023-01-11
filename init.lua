@@ -15,6 +15,3 @@ require 'keymaps'
 
 -- Plugins and plugin configuration
 require 'plugins'
-
--- For a list of Colors, execute  `:echo getcompletion('', 'color')`
-vim.cmd 'silent! colorscheme tokyonight-night'

@@ -1,18 +1,19 @@
 -- lua/config/gitsigns.lua
 
 require('gitsigns').setup {
+  -- Better gutter feedback on some color schemes
   signs = {
     add = { text = '+' },
     change = { text = '~' },
-    delete = { text = '_' },
-    topdelete = { text = '‾' },
-    changedelete = { text = '~' },
+    changedelete = { text = '-' },
   },
   numhl = true,
   current_line_blame_opts = {
     virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
   },
   current_line_blame_formatter = '<author> • <author_time:%Y-%m-%d> • <summary>',
+
+  -- Execute this only on the buffer
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -53,7 +54,6 @@ require('gitsigns').setup {
     map('n', '<leader>hb', function()
       gs.blame_line { full = true }
     end, { desc = 'Git blame line' })
-    map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'Git toggle current line blame' })
     map('n', '<leader>hd', gs.diffthis, { desc = 'Git diff this' })
     map('n', '<leader>hD', function()
       gs.diffthis '~'
@@ -65,8 +65,7 @@ require('gitsigns').setup {
   end,
 }
 
--- Commands
-
+-- Adding some commands for actions even though we have keymaps
 vim.api.nvim_create_user_command('GitDeleted', "lua require('gitsigns').toggle_deleted()", {
   desc = 'Git toggle preview deleted lines (gitsigns)',
 })
