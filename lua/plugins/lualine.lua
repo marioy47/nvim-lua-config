@@ -20,6 +20,7 @@ require('lualine').setup {
       {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
+        symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       },
       'diff',
       'fileformat',
@@ -29,17 +30,23 @@ require('lualine').setup {
     lualine_z = { 'searchcount' },
   },
   inactive_sections = {
-    lualine_a = {},
+    lualine_a = {
+      {
+        'filename',
+        symbols = { modified = '[]', readonly = ' ' },
+      },
+    },
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {},
+    lualine_y = { 'progress', 'location' },
     lualine_z = {},
   },
   options = {
     disabled_filetypes = {
       'packer',
       'NvimTree',
+      'qf',
     },
   },
 }

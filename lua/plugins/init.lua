@@ -79,10 +79,10 @@ use { -- Make the status line beautiful and more useful
     require 'plugins.lualine'
   end,
 }
-use { -- Detect tabstop and shiftwidth automatically with .editorconfig support
+use { -- Sets tabstop and shiftwidth automatically (:Sleuth). It also supports .editorconfig
   'tpope/vim-sleuth',
 }
-use { -- Add indentation guides even on blank lines
+use { -- Add indentation guides
   'lukas-reineke/indent-blankline.nvim',
   config = function()
     require('indent_blankline').setup {
@@ -91,7 +91,7 @@ use { -- Add indentation guides even on blank lines
     }
   end,
 }
-use { -- Show the actual color or RGB or CMYK values in your code (pe #ff00ee)
+use { -- Show the actual color or RGB or CMYK values in css, html and sass files (pe #ff00ee)
   'norcalli/nvim-colorizer.lua',
   config = function()
     require('colorizer').setup {
@@ -103,19 +103,19 @@ use { -- Show the actual color or RGB or CMYK values in your code (pe #ff00ee)
     }
   end,
 }
-use { -- Auto add closing quotes, brackets, tags, etc
+use { -- Auto add closing quotes, brackets, tags, etc. Great time saver
   'windwp/nvim-autopairs',
   config = function()
     require('nvim-autopairs').setup {}
   end,
 }
-use { -- Show GIT changes on the gutter and add some git visualiztions with <Leader>g
+use { -- Show GIT changes on the gutter and add some git visualizations with <Leader>g
   'lewis6991/gitsigns.nvim',
   config = function()
     require 'plugins.gitsigns'
   end,
 }
-use { -- Nvim-tree: Sidebar explorer and NetRW replacement
+use { -- Sidebar file explorer (NetRW replacement)
   'kyazdani42/nvim-tree.lua',
   requires = {
     'kyazdani42/nvim-web-devicons', -- optional, for file icon
@@ -127,10 +127,10 @@ use { -- Nvim-tree: Sidebar explorer and NetRW replacement
 use { -- Preview current markdown file with :MarkdownPreview
   'iamcco/markdown-preview.nvim',
   run = 'cd app && npm install',
-  ft = { 'markdown' },
+  ft = { 'markdown' }, -- Only on md files since this is a big plugin.
   cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' }, -- Load on this commands
 }
-use { -- Fizzy finder to find files, grep content, list buffers, etc.
+use { -- Fuzzy finder to find files, grep content, list buffers, etc.
   'nvim-telescope/telescope.nvim',
   tag = '0.1.0',
   requires = {
@@ -145,7 +145,7 @@ use { -- Use native FZF in telescope
   run = 'make',
   cond = vim.fn.executable 'make' == 1,
 }
-use { -- Install and configure treesitter languages
+use { -- Better code highlight, and adds source code navigation like `]m` or `[[`
   'nvim-treesitter/nvim-treesitter',
   run = function()
     require('nvim-treesitter.install').update { with_sync = true } -- Avoids TSUpdate failing on first run
@@ -154,16 +154,30 @@ use { -- Install and configure treesitter languages
     require 'plugins.treesitter'
   end,
 }
-use { -- Additional text objects (similar to paragraph manipulation) via treesitter with gS and gJ
+use { -- Additional text objects (similar to paragraph manipulation) via treesitter
   'nvim-treesitter/nvim-treesitter-textobjects',
   after = 'nvim-treesitter',
 }
-use { -- Split arrays and methods onto multiple lines, or join them back up.
+use { -- Adds the `:Neogen [type]` command to add annotations on functions, classes, etc.
+  'danymat/neogen',
+  config = function()
+    require('neogen').setup {}
+  end,
+  requires = 'nvim-treesitter/nvim-treesitter',
+}
+use { -- Split arrays and methods onto multiple lines, or join them back up with gS and gJ
   'AndrewRadev/splitjoin.vim',
   config = function()
     vim.g.splitjoin_html_attributes_bracket_on_new_line = 1
     vim.g.splitjoin_trailing_comma = 1
     vim.g.splitjoin_php_method_chain_full = 1
+  end,
+}
+use { -- Autoclose html and jsx tags. Auto rename closing tag.
+  'windwp/nvim-ts-autotag',
+  requires = 'nvim-treesitter/nvim-treesitter',
+  config = function()
+    require('nvim-ts-autotag').setup()
   end,
 }
 use { -- Language Server configuration
@@ -188,6 +202,10 @@ use { -- Language Server configuration
 
     -- Useful status updates for LSP
     { 'j-hui/fidget.nvim' },
+
+    -- null-ls integration
+    'jose-elias-alvarez/null-ls.nvim',
+    'jay-babu/mason-null-ls.nvim',
   },
   config = function()
     require 'plugins.lsp'

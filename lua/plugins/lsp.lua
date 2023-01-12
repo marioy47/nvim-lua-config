@@ -13,10 +13,7 @@ require('mason.settings').set {
 -- Display LSP status on the bottom right corner
 require('fidget').setup()
 
--- vim.keymap.set('n', '<leader>cf', '<cmd>LspZeroFormat<cr>', { desc = '[C]ode [F]ormat' })
--- vim.keymap.set('n', '<leader>cr', '<F2>', { desc = '[C]ode [R]ename' })
--- vim.keymap.set('n', '<leader>ca', '<F4>', { desc = '[C]ode [A]ctions' })
-
+-- Config LSP Zero
 local lsp = require 'lsp-zero'
 lsp.preset 'recommended'
 lsp.ensure_installed {
@@ -84,3 +81,35 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+
+-- Integration with [Null-Ls](https://github.com/VonHeikemen/lsp-zero.nvim/blob/main/advance-usage.md#intergrate-with-null-ls)
+local null_ls = require 'null-ls'
+null_ls.setup {
+  sources = {
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.completion.spell, -- You still need to execute `:set spell`
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.diagnostics.markdownlint.with {
+      extra_args = { '--disable', 'line-length' },
+    }, -- Install it with `npm i -g markdownlint-cli`
+    null_ls.builtins.diagnostics.phpcs.with { -- Use the local installation first
+      diagnostics_format = '#{m} (#{c}) [#{s}]', -- Makes PHPCS errors more readeable
+      only_local = 'vendor/bin',
+    },
+    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.markdownlint,
+    null_ls.builtins.formatting.phpcbf.with {
+      prefer_local = 'vendor/bin',
+    },
+    null_ls.builtins.formatting.prettierd,
+  },
+}
+
+-- see documentation of null-null-ls for more configuration options!
+local mason_nullls = require 'mason-null-ls'
+mason_nullls.setup {
+  ensure_installed = { 'stylua', 'jq', 'prettierd' },
+  automatic_installation = true,
+  automatic_setup = true,
+}
+mason_nullls.setup_handlers {}
