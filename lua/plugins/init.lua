@@ -130,6 +130,15 @@ use { -- Preview current markdown file with :MarkdownPreview
   ft = { 'markdown' }, -- Only on md files since this is a big plugin.
   cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' }, -- Load on this commands
 }
+use { -- Floating terminal with <leader>tt
+  'voldikss/vim-floaterm',
+  config = function()
+    vim.g.floaterm_width = 0.9
+    vim.g.floaterm_height = 0.8
+    vim.keymap.set('n', '<Leader>tt', '<cmd>FloatermToggle<cr>')
+    vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n><cmd>FloatermToggle<cr>')
+  end,
+}
 use { -- Fuzzy finder to find files, grep content, list buffers, etc.
   'nvim-telescope/telescope.nvim',
   tag = '0.1.0',
