@@ -1,7 +1,7 @@
 -- lua/config/nvim-tree.lua
 
 require('nvim-tree').setup {
-  open_on_setup = true,
+  -- open_on_setup = true,
   -- Change sidebar position and size
   view = {
     adaptive_size = true,
