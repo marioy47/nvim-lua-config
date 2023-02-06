@@ -184,10 +184,9 @@ use { -- Split arrays and methods onto multiple lines, or join them back up with
 }
 use { -- Autoclose html and jsx tags. Auto rename closing tag.
   'windwp/nvim-ts-autotag',
+  after = 'nvim-treesitter/nvim-treesitter',
   requires = 'nvim-treesitter/nvim-treesitter',
-  config = function()
-    require('nvim-ts-autotag').setup()
-  end,
+  disable = true,
 }
 use { -- Language Server configuration
   'VonHeikemen/lsp-zero.nvim',

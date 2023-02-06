@@ -3,8 +3,7 @@
 
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'vim', 'python', 'javascript', 'typescript', 'help', 'php', 'phpdoc' },
-
+  ensure_installed = { 'html', 'lua', 'vim', 'python', 'javascript', 'typescript', 'help', 'php', 'phpdoc' },
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
@@ -50,6 +49,9 @@ require('nvim-treesitter.configs').setup {
         ['[]'] = '@class.outer',
       },
     },
+  },
+  autotag = { -- For 'windwp/nvim-ts-autotag'. MAKE sure that 'html' is in the list of languages
+    enable = true,
   },
 }
 
