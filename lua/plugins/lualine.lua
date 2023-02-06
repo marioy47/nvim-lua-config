@@ -13,7 +13,9 @@ require('lualine').setup {
         symbols = { modified = '[]', readonly = ' ' },
       },
     },
-    lualine_b = {},
+    lualine_b = {
+      '" " .. tostring(#vim.tbl_keys(vim.lsp.buf_get_clients()))',
+    },
     lualine_c = {},
     lualine_x = {
       'branch',
