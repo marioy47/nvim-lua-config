@@ -25,6 +25,8 @@ lsp.ensure_installed {
   'sumneko_lua',
   'tsserver',
   'vimls',
+  'bashls',
+  'lemminx',
 }
 
 -- Fix Undefined global 'vim'
@@ -163,6 +165,18 @@ lsp.on_attach(function(client, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end)
+
+-- Add additional sources for nvim-cmp (just signature_help currently)
+lsp.setup_nvim_cmp {
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' }, -- additional source
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'nvim_lua' },
+  },
+}
 
 lsp.setup()
 

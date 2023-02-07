@@ -208,12 +208,15 @@ use { -- Language Server configuration
     { 'L3MON4D3/LuaSnip' },
     { 'rafamadriz/friendly-snippets' },
 
-    -- Useful status updates for LSP
+    -- Mario Yepes: Useful status updates for LSP
     { 'j-hui/fidget.nvim' },
 
-    -- null-ls integration
+    -- Mario Yepes; null-ls integration
     'jose-elias-alvarez/null-ls.nvim',
     'jay-babu/mason-null-ls.nvim',
+
+    -- Mario Yepes: Additional autompletion sources
+    'hrsh7th/cmp-nvim-lsp-signature-help',
   },
   config = function()
     require 'plugins.lsp'
