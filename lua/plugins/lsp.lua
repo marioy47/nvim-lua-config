@@ -124,6 +124,14 @@ lsp.configure('intelephense', {
   },
 })
 
+lsp.configure('jsonls', {
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+    },
+  },
+})
+
 -- Use [Kickstart](https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua) keymaps
 lsp.on_attach(function(client, bufnr)
   -- if client.name == "eslint" then

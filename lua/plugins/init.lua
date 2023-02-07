@@ -217,6 +217,7 @@ use { -- Language Server configuration
 
     -- Mario Yepes: Additional autompletion sources
     'hrsh7th/cmp-nvim-lsp-signature-help',
+    'b0o/schemastore.nvim',
   },
   config = function()
     require 'plugins.lsp'
