@@ -72,3 +72,6 @@ vim.api.nvim_create_user_command('GitDeleted', "lua require('gitsigns').toggle_d
 vim.api.nvim_create_user_command('GitBlame', "lua require('gitsigns').toggle_current_line_blame()", {
   desc = 'Git toggle line blame for current line (gitsigns)',
 })
+vim.api.nvim_create_user_command('GitDiff', "lua require('gitsigns').diffthis()", {
+  desc = 'Git toggle line blame for current line (gitsigns)',
+})
