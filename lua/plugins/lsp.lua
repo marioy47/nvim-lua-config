@@ -22,7 +22,7 @@ lsp.ensure_installed {
   'eslint',
   'intelephense',
   'jsonls',
-  'sumneko_lua',
+  'lua_ls',
   'tsserver',
   'vimls',
   'bashls',
@@ -42,6 +42,7 @@ lsp.configure('sumneko_lua', {
   },
 })
 
+-- Add WordPress to the list of supported stubs
 lsp.configure('intelephense', {
   settings = {
     intelephense = {
@@ -124,6 +125,7 @@ lsp.configure('intelephense', {
   },
 })
 
+-- Enable autompletion of keys in conf files like `package.json` or `.eslintrc.json`
 lsp.configure('jsonls', {
   settings = {
     json = {
@@ -156,7 +158,7 @@ lsp.on_attach(function(client, bufnr)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-  -- See `:help K` for why this keymap
+  -- See `:help K` for why this keymap for displaying inline help
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
@@ -186,12 +188,14 @@ lsp.setup_nvim_cmp {
   },
 }
 
+-- Finally execute the LspZero setup
 lsp.setup()
 
 -- Integration with [Null-Ls](https://github.com/VonHeikemen/lsp-zero.nvim/blob/main/advance-usage.md#intergrate-with-null-ls)
 local null_ls = require 'null-ls'
 null_ls.setup {
   sources = {
+    -- Eslint
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.eslint_d.with {
       condition = function(utils)
@@ -204,11 +208,13 @@ null_ls.setup {
       end,
     },
 
+    -- Markdown
     null_ls.builtins.formatting.markdownlint,
     null_ls.builtins.diagnostics.markdownlint.with {
       extra_args = { '--disable', 'line-length' },
     }, -- Install it with `npm i -g markdownlint-cli`
 
+    -- PhpCs and PhpCbf
     null_ls.builtins.diagnostics.phpcs.with { -- Use the local installation first
       diagnostics_format = '#{m} (#{c}) [#{s}]', -- Makes PHPCS errors more readeable
       only_local = 'vendor/bin',
@@ -217,12 +223,13 @@ null_ls.setup {
       prefer_local = 'vendor/bin',
     },
 
+    -- Prettier and spelling
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.completion.spell, -- You still need to execute `:set spell`
   },
 }
 
--- see documentation of null-null-ls for more configuration options!
+-- Install linting and formating apps using Mason
 local mason_nullls = require 'mason-null-ls'
 mason_nullls.setup {
   ensure_installed = { 'stylua', 'jq', 'prettierd' },
