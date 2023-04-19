@@ -27,6 +27,7 @@ lsp.ensure_installed {
   'vimls',
   'bashls',
   'lemminx',
+  'marksman',
 }
 
 -- Fix Undefined global 'vim'

@@ -109,7 +109,7 @@ use { -- Auto add closing quotes, brackets, tags, etc. Great time saver
     require('nvim-autopairs').setup {}
   end,
 }
-use { -- Show GIT changes on the gutter and add some git visualizations with <Leader>g
+use { -- Show GIT changes on the gutter, stage/unstage hunks with <Leader>hs and add some git visualizations with <Leader>td and
   'lewis6991/gitsigns.nvim',
   config = function()
     require 'plugins.gitsigns'
@@ -221,6 +221,15 @@ use { -- Language Server configuration
   },
   config = function()
     require 'plugins.lsp'
+  end,
+}
+
+use { -- Php refactoring
+  'phpactor/phpactor',
+  ft = 'php',
+  run = 'composer install --no-dev --optimize-autoloader',
+  config = function()
+    vim.keymap.set('n', '<Leader>pm', ':PhpactorContextMenu<cr>')
   end,
 }
 --[[
