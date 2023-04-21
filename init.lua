@@ -1,8 +1,8 @@
 -- init.lua
 
--- Required to be here by the plugin nvim-tree
---vim.g.loaded_netrw = 1
---vim.g.loaded_netrwPlugin = 1
+-- Required to be here by the plugin nvim-tree (https://github.com/nvim-tree/nvim-tree.lua#setup)
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Vim native options. Make it more modern
 require 'options'
@@ -14,4 +14,4 @@ require 'commands'
 require 'keymaps'
 
 -- Plugins and plugin configuration
-require 'plugins'
+require 'plugins' -- plugins/init.lua

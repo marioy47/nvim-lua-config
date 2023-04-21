@@ -27,9 +27,7 @@ vim.g.netrw_liststyle = 3 -- Use nested tree style NetRW
 vim.g.netrw_winsize = 25 -- Lexplore takes 25% of the screen
 vim.g.netrw_altv = 'nospr'
 vim.o.ch = 0 -- Requires Nvim 0.8: Hide command line at end unless a command is being executed
--- vim.opt.formatoptions:append { 'r' } -- Add asterisks in block comments (Not 100% sure)
 vim.opt.tabstop = 4
--- vim.opt.spell = true -- Enable spelling on comments and docs
 vim.opt.scrolloff = 1 -- Always put at least 1 line above or below the cursor (more context this way)
 vim.opt.sidescrolloff = 2 -- When scrolling right, leave 2 chars to the right or left
 vim.opt.confirm = true -- Ask for confirmation instead of error out when doing something like closing without saving

@@ -1,22 +1,15 @@
 -- lua/config/nvim-tree.lua
 
 require('nvim-tree').setup {
-  -- open_on_setup = true,
   -- Change sidebar position and size
   view = {
     adaptive_size = true,
     width = 45,
     side = 'right',
-    mappings = {
-      list = {
-        { key = '<C-k>', action = '' }, -- Avoid conflicts with other plugins
-        { key = 'i', action = 'toggle_file_info' }, -- Friendlier with Spanish Keyboards
-      },
-    },
   },
   -- Make it prettier and have more git information
   renderer = {
-    add_trailing = true,
+    add_trailing = true, -- Display git status (staged, modified, etc) on files
     indent_markers = {
       enable = true,
     },
@@ -24,16 +17,16 @@ require('nvim-tree').setup {
     highlight_opened_files = 'all',
   },
   diagnostics = {
-    enable = true,
+    enable = true, -- Show a warning on files with lint issues
     show_on_dirs = true,
   },
   git = {
     ignore = false, -- Do not hide .gitignore files
   },
-  -- Change the default behav
+  -- Change the default behaviour
   actions = {
     open_file = {
-      quit_on_open = true, -- Autoclose the sidebar when a file gets opened
+      quit_on_open = true, -- Auto close the sidebar when a file gets opened
       resize_window = true, -- Resize the sidebar when the windows resizes
       window_picker = {
         enable = false, -- Ask the user on which window to open when split are open

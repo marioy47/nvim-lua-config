@@ -42,29 +42,13 @@ use { -- Port of VSCode's Tokio Night theme
     vim.cmd.colorscheme 'tokyonight-moon'
   end,
 }
-use { -- Inline help for key combinations on normal mode
-  'folke/which-key.nvim',
-  config = function()
-    require('which-key').setup {
-      plugins = {
-        spelling = {
-          enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-        },
-      },
-      window = {
-        margin = { 0, 0, 0, 0 }, -- remove window margin [top, right, bottom, left]
-        padding = { 0, 0, 0, 0 }, -- remove window padding [top, right, bottom, left]
-      },
-    }
-  end,
-}
 use { -- Fast commenting! Enable gcc and gcb for comments
   'numToStr/Comment.nvim',
   config = function()
     require('Comment').setup()
   end,
 }
-use { -- Align items to a character. Useful on WordPress development.
+use { -- Align items to a character with ga. Useful on WordPress development.
   'Vonr/align.nvim',
   config = function()
     local NS = { noremap = true, silent = true }
@@ -109,7 +93,7 @@ use { -- Auto add closing quotes, brackets, tags, etc. Great time saver
     require('nvim-autopairs').setup {}
   end,
 }
-use { -- Show GIT changes on the gutter, stage/unstage hunks with <Leader>hs and add some git visualizations with <Leader>td and
+use { -- Show GIT changes on the gutter, stage/unstage hunks and add some git visualizations (revew plugins.gitsigns for keymaps)
   'lewis6991/gitsigns.nvim',
   config = function()
     require 'plugins.gitsigns'
@@ -188,54 +172,41 @@ use { -- Autoclose html and jsx tags. Auto rename closing tag.
   requires = 'nvim-treesitter/nvim-treesitter',
   disable = true,
 }
-use { -- Language Server configuration
+use {
   'VonHeikemen/lsp-zero.nvim',
+  branch = 'v2.x',
   requires = {
     -- LSP Support
-    { 'neovim/nvim-lspconfig' },
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
+    { 'neovim/nvim-lspconfig' }, -- Required
+    { -- Optional
+      'williamboman/mason.nvim',
+      build = function()
+        pcall(vim.cmd, 'MasonUpdate')
+      end,
+    },
+    { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
     -- Autocompletion
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-path' },
-    { 'saadparwaiz1/cmp_luasnip' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-nvim-lua' },
+    { 'hrsh7th/nvim-cmp' }, -- Required
+    { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+    { 'L3MON4D3/LuaSnip' }, -- Required
 
-    -- Snippets
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' },
-
-    -- Mario Yepes: Useful status updates for LSP
+    -- Show a fidget at the bottom-right when LSP is working
     { 'j-hui/fidget.nvim' },
+    { 'b0o/schemastore.nvim' },
 
-    -- Mario Yepes; null-ls integration
-    'jose-elias-alvarez/null-ls.nvim',
-    'jay-babu/mason-null-ls.nvim',
-
-    -- Mario Yepes: Additional autompletion sources
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'b0o/schemastore.nvim',
+    -- null-ls integration
+    { 'jose-elias-alvarez/null-ls.nvim' },
+    { 'jay-babu/mason-null-ls.nvim' },
   },
   config = function()
     require 'plugins.lsp'
   end,
 }
 
-use { -- Php refactoring
-  'phpactor/phpactor',
-  ft = 'php',
-  run = 'composer install --no-dev --optimize-autoloader',
-  config = function()
-    vim.keymap.set('n', '<Leader>pm', ':PhpactorContextMenu<cr>')
-  end,
-}
 --[[
   Finish plugin configuration
 --]]
-
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
