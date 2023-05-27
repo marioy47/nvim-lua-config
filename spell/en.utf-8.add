@@ -6,3 +6,7 @@ linters
 MailHog
 PhpMyAdmin
 Nginx
+stylesheet
+backend
+Elementor
+REPL
