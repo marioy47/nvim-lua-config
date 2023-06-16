@@ -50,7 +50,7 @@ require('lspconfig').jsonls.setup {
 
 lsp.setup()
 
--- Null-Ls for formatting
+-- Null-Ls for formatting and linting using external tools.
 local null_ls = require 'null-ls'
 null_ls.setup {
   sources = {

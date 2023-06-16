@@ -192,7 +192,8 @@ use {
     { 'L3MON4D3/LuaSnip' }, -- Required
 
     -- Show a fidget at the bottom-right when LSP is working
-    { 'j-hui/fidget.nvim' },
+    { 'j-hui/fidget.nvim', branch = 'legacy' },
+
     { 'b0o/schemastore.nvim' },
 
     -- null-ls integration
