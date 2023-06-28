@@ -10,3 +10,5 @@ stylesheet
 backend
 Elementor
 REPL
+PostgreSQL
+PgAdmin4
