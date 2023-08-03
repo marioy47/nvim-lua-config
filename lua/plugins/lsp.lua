@@ -34,6 +34,7 @@ lsp.ensure_installed {
   'jsonls',
   'bashls',
   'marksman',
+  'cspell',
 }
 
 -- Configure lua language server for neovim
@@ -84,7 +85,11 @@ null_ls.setup {
 
     -- Prettier and spelling
     null_ls.builtins.formatting.prettierd,
+
+    -- Spelling
     null_ls.builtins.completion.spell, -- You still need to execute `:set spell`
+    null_ls.builtins.diagnostics.cspell,
+    null_ls.builtins.code_actions.cspell,
   },
 }
 
