@@ -74,7 +74,7 @@ null_ls.setup {
       extra_args = { '--disable', 'line-length' },
     },
 
-    -- PhpCs and PhpCbf
+    -- Php (PHPCS, PHPCBF, PHPStan)
     null_ls.builtins.diagnostics.phpcs.with { -- Use the local installation first
       diagnostics_format = '#{m} (#{c}) [#{s}]', -- Makes PHPCS errors more readeable
       only_local = 'vendor/bin',
@@ -82,6 +82,7 @@ null_ls.setup {
     null_ls.builtins.formatting.phpcbf.with {
       prefer_local = 'vendor/bin',
     },
+    null_ls.builtins.diagnostics.phpstan,
 
     -- Prettier and spelling
     null_ls.builtins.formatting.prettierd,
