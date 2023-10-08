@@ -1,4 +1,5 @@
 -- lua/plugins.lua
+-- cSpell:disable
 
 -- Execute `:so %`,  `:PackerSync` and `:PackerCompile` after each change
 
@@ -68,10 +69,14 @@ use { -- Sets tabstop and shiftwidth automatically (:Sleuth). It also supports .
 }
 use { -- Add indentation guides
   'lukas-reineke/indent-blankline.nvim',
+  main = 'ibl',
   config = function()
-    require('indent_blankline').setup {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+    local highlight = {
+      'CursorColumn',
+      'Whitespace',
+    }
+    require('ibl').setup {
+      indent = { char = '┊' },
     }
   end,
 }

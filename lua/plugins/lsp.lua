@@ -34,7 +34,8 @@ lsp.ensure_installed {
   'jsonls',
   'bashls',
   'marksman',
-  'cspell',
+  'astro',
+  -- 'cspell',
 }
 
 -- Configure lua language server for neovim
