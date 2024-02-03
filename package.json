@@ -10,7 +10,7 @@
     "lint:lua": "stylua --check init.lua lua/*",
     "lint:md": "markdownlint README.md",
     "postinstall": "husky install",
-    "reset": "rm -rf plugin/packer_compiled.lua ~/.local/share/nvim ~/.local/state/nvim",
+    "reset": "rm -rf plugin/packer_compiled.lua ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim",
     "setup": "nvim --headless +PackerSync"
   },
   "keywords": [],
