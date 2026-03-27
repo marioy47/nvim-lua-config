@@ -15,7 +15,7 @@ If you are interested in the rest of my setup, you can visit my [dotfiles repo](
 - NeoVim at least version 0.8
 - Git
 - (Optional) [Stylua](https://github.com/johnnymorganz/stylua) for linting of `.lua` files
-- (Optional) [PHPCS and PHPCBF](https://github.com/squizlabs/PHP_CodeSniffer) for PHP linting and formatting
+- (Optional) [PHPCS and PHPCBF](https://github.com/PHPCSStandards/PHP_CodeSniffer) for PHP linting and formatting
 - (Optional) [eslint_d](https://github.com/mantoni/eslint_d.js) for faster JavaScript linting and diagnostics
 - (Optional) [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) for markdown formatting and linting
 
